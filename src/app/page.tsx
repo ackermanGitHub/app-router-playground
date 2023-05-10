@@ -1,8 +1,6 @@
 import Image from 'next/image'
 
-export const config = {
-  runtime: 'edge-runtime',
-}
+export const runtime = "edge"
 
 export default function Home() {
   return (
