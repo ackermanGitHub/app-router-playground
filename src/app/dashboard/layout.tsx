@@ -10,6 +10,6 @@ export default function RootLayout({
     children: React.ReactNode
 }) {
     return (
-        <div className='w-1/2 h-1/2 border-red-500'></div>
+        <div className='w-1/2 h-1/2 border-solid border-2 border-red-500'></div>
     )
 }

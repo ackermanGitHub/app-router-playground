@@ -9,24 +9,26 @@ export default async function handler(
 
   try {
     await client.sql`
-        CREATE TABLE profiles (
-            id SERIAL PRIMARY KEY,
-            profilename VARCHAR(50) NOT NULL UNIQUE,
-            email VARCHAR(100) NOT NULL UNIQUE,
-            password VARCHAR(100) NOT NULL,
-            avatar_url VARCHAR(255)
-        );
+      CREATE TABLE posts (
+        id SERIAL PRIMARY KEY,
+        user_id INTEGER NOT NULL,
+        image_url VARCHAR(255) NOT NULL,
+        caption VARCHAR(300),
+        likes INTEGER DEFAULT 0,
+        created_at TIMESTAMP DEFAULT NOW(),
+        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+      );
     `;
     await client.sql`
-        INSERT INTO profiles (profilename, email, password, avatar_url) 
-        VALUES ('johndoe', 'johndoe@example.com', 'abc123', 'https://example.com/avatar.jpg');
+      INSERT INTO posts (user_id, image_url, caption, likes) 
+      VALUES (1, 'https://example.com/image.jpg', 'This is a caption for the post', 10);
     `;
   } catch (error) {
     return response.status(500).json({ error });
   }
 
-  const pets = await client.sql`SELECT * FROM Pets;`;
-  return response.status(200).json({ pets });
+  const posts = await client.sql`SELECT * FROM posts;`;
+  return response.status(200).json({ posts });
 }
 
 /* 
