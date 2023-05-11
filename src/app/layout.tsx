@@ -17,7 +17,10 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={inter.className}>{children}</body>
+        <body className={inter.className}>
+          <nav className="p-4 bg-gray-800 text-white"><h1>Nextjs App Router Playground</h1></nav>
+          <main className='border-blue-500'>{children}</main>
+        </body>
       </html>
     </ClerkProvider>
   )
