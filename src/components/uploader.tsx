@@ -2,6 +2,9 @@
 import Image from "next/image";
 import { useRef, useState } from "react";
 
+import { ourFileRouter } from "@/app/api/uploadthing/core";
+import { genUploader } from "uploadthing/client";
+
 
 export function MultiUploader() {
     const inputRef = useRef<HTMLInputElement>(null);
@@ -15,6 +18,8 @@ export function MultiUploader() {
             }
         }
     };
+
+    const uploader = genUploader<typeof ourFileRouter>();
 
     return (
         <>
@@ -32,8 +37,9 @@ export function MultiUploader() {
                         />
                     );
                 })}
-                <input ref={inputRef} type="file" onChange={handleFileSelect} multiple />
+                <input ref={inputRef} type="file" accept="image/*" onChange={handleFileSelect} multiple />
                 <button onClick={() => {
+                    uploader(selectedFiles, "imageUploader")
                 }}>Upload</button>
             </div>
         </>
