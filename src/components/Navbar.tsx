@@ -26,7 +26,8 @@ const Navbar = () => {
                             "Content-Type": "application/json"
                         }
                     })
-                    console.log(res)
+                    const data = await res.json();
+                    console.log(data)
                 }} className="bg-blue-400 🅱️ text-white rounded-lg px-4 py-2">Inject Data</button>
 
             </SignedOut>
