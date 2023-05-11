@@ -18,7 +18,6 @@ export function MultiUploader() {
             }
         }
     };
-
     const uploader = genUploader<typeof ourFileRouter>();
 
     return (
