@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from 'next/server';
-import { getAuth, withClerkMiddleware } from '@clerk/nextjs/server';
+import { withClerkMiddleware } from '@clerk/nextjs/server';
 
 const publicPaths = ['/sign-in*', '/sign-up*', '/api*'];
 
@@ -9,7 +9,7 @@ const isPublic = (reqPath: string) => {
   );
 };
 
-export default withClerkMiddleware((request: NextRequest) => {
+export default withClerkMiddleware(() => {
   return NextResponse.next();
 });
 
