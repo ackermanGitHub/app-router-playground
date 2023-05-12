@@ -5,11 +5,12 @@ This is a Next.js 13.4 page using the new app router and the new feature "server
 ## Getting Started
 
 To get started, clone this repository and install the dependencies:
+
 `npm install`
 
 Then, start the development server:
-`The page will be available at`localhost:3000`.
-`
+
+`The page will be available at localhost:3000`.
 
 ## Features
 
