@@ -5,6 +5,7 @@ import { useRef, useState } from "react";
 import { ourFileRouter } from "@/app/api/uploadthing/core";
 import { genUploader } from "uploadthing/client";
 
+import Divider from "./Divider";
 
 export function MultiUploader() {
     const inputRef = useRef<HTMLInputElement>(null);
@@ -22,9 +23,22 @@ export function MultiUploader() {
     const uploader = genUploader<typeof ourFileRouter>();
 
     return (
-        <>
-            <div>
-                <h1>regular input</h1>
+        <div className="w-full flex flex-col items-center justify-center">
+            <div className="my-4"></div>
+            <div className="flex w-full items-center justify-center gap-2">
+                <label htmlFor="file-upload" className="bg-blue-500 🅱️ text-white rounded-lg px-4 py-2">Select Files</label>
+                <input className="hidden" id="file-upload" ref={inputRef} type="file" accept="image/*" onChange={handleFileSelect} multiple />
+                <button
+                    className="bg-blue-500 🅱️ text-white rounded-lg px-4 py-2"
+                    onClick={() => {
+                        uploader(selectedFiles, "imageUploader")
+                    }}
+                >
+                    Upload
+                </button>
+            </div>
+            <Divider />
+            <div className="flex w-full justify-center flex-wrap gap-2">
                 {selectedFiles.map((item, index) => {
                     const imageUrl = URL.createObjectURL(item);
                     return (
@@ -37,11 +51,8 @@ export function MultiUploader() {
                         />
                     );
                 })}
-                <input ref={inputRef} type="file" accept="image/*" onChange={handleFileSelect} multiple />
-                <button onClick={() => {
-                    uploader(selectedFiles, "imageUploader")
-                }}>Upload</button>
             </div>
-        </>
+            <div className="my-4"></div>
+        </div>
     );
 }
