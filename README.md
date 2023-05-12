@@ -1,34 +1,75 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Todo Page
+This is a Next.js 13.4 page using the new app router and the new feature "server actions". It is a simple todo page where you can store your tasks list.
 
-## Getting Started
+Getting Started
+To get started, clone this repository and install the dependencies:
 
-First, run the development server:
+npm install
 
-```bash
+Code snippet
+
+Then, start the development server:
+
+Use code with caution. Learn more
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Code snippet
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The page will be available at `localhost:3000`.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Features
 
-## Learn More
+This todo page has the following features:
 
-To learn more about Next.js, take a look at the following resources:
+- You can create, edit, and delete tasks.
+- You can mark tasks as completed.
+- You can filter tasks by category.
+- You can search for tasks.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Data Model
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+The data model for this todo page is as follows:
 
-## Deploy on Vercel
+Use code with caution. Learn more
+{
+"todos": [
+{
+"id": 1,
+"title": "Buy milk",
+"text": "Buy milk from the store",
+"category": "Groceries",
+"priority": 1,
+"completed": false,
+"due_date": "2023-05-15",
+"assigned_to": null,
+"notes": null,
+"attachments": null,
+"tags": []
+},
+{
+"id": 2,
+"title": "Do laundry",
+"text": "Wash and fold the laundry",
+"category": "Household chores",
+"priority": 2,
+"completed": false,
+"due_date": "2023-05-16",
+"assigned_to": null,
+"notes": null,
+"attachments": null,
+"tags": []
+}
+]
+}
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Next.js
+Next.js is a React framework that makes it easy to build fast and scalable web applications. It uses server-side rendering to improve performance and SEO, and it supports a wide range of features, including routing, state management, and internationalization.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+App Router
+The app router is a new feature in Next.js 13.4 that makes it easy to manage routes in your application. It provides a declarative API for defining routes, and it automatically generates code for you.
+
+Server Actions
+Server actions are a new feature in Next.js 13.4 that allows you to run code on the server before or after a request is handled. This can be used for a variety of tasks, such as authentication, authorization, and data fetching.
+
+Conclusion
+This is just a simple example of a todo page. You can use this as a starting point to build your own todo application.
