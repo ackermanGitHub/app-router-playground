@@ -6,6 +6,7 @@ import { zact } from 'zact/server';
 /* 
 CREATE TABLE todos (
     todo_id SERIAL PRIMARY KEY,
+    user_id TEXT NOT NULL,
     date_created TIMESTAMP DEFAULT NOW(),
     title TEXT,
     text TEXT,
@@ -20,6 +21,7 @@ CREATE TABLE todos (
 );
 */
 const toDoSchema = z.object({
+  user_id: z.string().max(32).optional().nullable(),
   title: z.string().max(32).optional().nullable(),
   text: z.string().optional().nullable(),
   category: z.string().optional().nullable(),
@@ -57,10 +59,10 @@ export const insertToDo = zact(toDoSchema)(async (input) => {
         INSERT INTO todos (${keys})
         VALUES (${values.map((value) => absValue(value))});
       `);
-    // await client.query(`
-    //     INSERT INTO todos (${Object.keys(input)})
-    //     VALUES (${Object.values(input).map((value) => absValue(value))});
-    //   `);
+    await client.query(`
+        INSERT INTO todos (${keys})
+        VALUES (${values.map((value) => absValue(value))});
+       `);
   } catch (e) {
     throw e;
   }
