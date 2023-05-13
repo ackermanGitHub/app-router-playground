@@ -1,19 +1,19 @@
 import { sql, QueryResult } from "@vercel/postgres";
-import * as z from 'zod';
+import z from 'zod';
 
 const todoSchema = {
     todo_id: z.number().int().positive(),
-    date_created: z.date().optional().default(new Date()),
-    title: z.string().optional(),
-    text: z.string().optional(),
-    category: z.string().optional(),
-    priority: z.number().int().optional(),
-    completed: z.boolean().optional().default(false),
-    due_date: z.date().optional(),
-    assigned_to: z.string().optional(),
-    notes: z.object({}).optional(),
-    attachments: z.object({}).optional(),
-    tags: z.array(z.string()).optional(),
+    date_created: z.date(),
+    title: z.string().optional().nullable(),
+    text: z.string().optional().nullable(),
+    category: z.string().optional().nullable(),
+    priority: z.number().int().optional().nullable(),
+    completed: z.boolean().optional().nullable(),
+    due_date: z.date().optional().nullable(),
+    assigned_to: z.string().optional().nullable(),
+    notes: z.object({}).optional().nullable(),
+    attachments: z.object({}).optional().nullable(),
+    tags: z.array(z.string()).optional().nullable(),
 };
 
 const getToDos = async () => {
