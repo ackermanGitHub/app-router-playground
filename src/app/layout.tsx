@@ -18,9 +18,13 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={`${inter.className} h-screen`}>
-          <Navbar />
-          {children}
+        <body className={`${inter.className} h-screen relative`}>
+          <header className='w-auto'>
+            <Navbar />
+          </header>
+          <main className='w-full h-auto'>
+            {children}
+          </main>
         </body>
       </html>
     </ClerkProvider>
