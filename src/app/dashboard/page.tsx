@@ -6,6 +6,7 @@ export default function Home() {
     return (
         <div className="container mx-auto">
             <AddToDo />
+            {/* @ts-ignore */}
             <ToDos />
         </div>
     )
