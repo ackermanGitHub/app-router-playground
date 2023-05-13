@@ -1,5 +1,5 @@
 'use server';
-import { createClient } from '@vercel/postgres';
+import { createClient, sql } from '@vercel/postgres';
 import { z } from 'zod';
 import { zact } from 'zact/server';
 
@@ -20,30 +20,47 @@ CREATE TABLE todos (
 );
 */
 const toDoSchema = z.object({
-  title: z.string().max(32).optional(),
-  text: z.string().optional(),
-  category: z.string().optional(),
-  priority: z.number().int().optional(),
-  due_date: z.date().optional(),
-  assigned_to: z.string().optional(),
-  notes: z.string().optional(),
-  attachments: z.string().optional(),
-  tags: z.array(z.string()).optional(),
+  title: z.string().max(32).optional().nullable(),
+  text: z.string().optional().nullable(),
+  category: z.string().optional().nullable(),
+  priority: z.number().int().optional().nullable(),
+  due_date: z.date().optional().nullable(),
+  assigned_to: z.string().optional().nullable(),
+  notes: z.string().optional().nullable(),
+  attachments: z.string().optional().nullable(),
+  tags: z.array(z.string()).optional().nullable(),
 });
 
-export const insertToDoWithClientQuery = zact(toDoSchema)(async (input) => {
+export const insertToDo = zact(toDoSchema)(async (input) => {
   const client = createClient();
   await client.connect();
 
+  const noNulls = Object.entries(input).filter(([_key, value]) => {
+    if (value !== null) {
+      return true;
+    }
+    return false;
+  });
+
+  const noEmptyStrings = noNulls.filter(([_key, value]) => {
+    if (value !== '') {
+      return true;
+    }
+    return false;
+  });
+
+  const keys = noEmptyStrings.map((entry) => entry[0]);
+  const values = noEmptyStrings.map((entry) => entry[1]);
+
   try {
     console.log(`
-        INSERT INTO todos ( ${Object.keys(input)} )
-        VALUES (${Object.values(input).map((value) => absValue(value))});
+        INSERT INTO todos (${keys})
+        VALUES (${values.map((value) => absValue(value))});
       `);
-    await client.query(`
-        INSERT INTO todos ( ${Object.keys(input)} )
-        VALUES (${Object.values(input).map((value) => absValue(value))});
-      `);
+    // await client.query(`
+    //     INSERT INTO todos (${Object.keys(input)})
+    //     VALUES (${Object.values(input).map((value) => absValue(value))});
+    //   `);
   } catch (e) {
     throw e;
   }
@@ -53,7 +70,7 @@ export const insertToDoWithClientQuery = zact(toDoSchema)(async (input) => {
 });
 
 function absValue(
-  value: string[] | Date | number | string | undefined
+  value: string[] | Date | number | string | undefined | null
 ): string {
   let res = '';
 
@@ -72,7 +89,7 @@ function absValue(
         res = `ARRAY[${value.map((value) => absValue(value))}]`;
       }
       if (value === null) {
-        return '';
+        res = 'NULL';
       }
       break;
     default:

@@ -1,9 +1,9 @@
 "use client"
 import { useZact } from "zact/client";
-import { insertToDoWithClientQuery } from "@/server/actions";
+import { insertToDo } from "@/server/actions";
 
 export default function AddToDo() {
-    const { mutate, data, isLoading } = useZact(insertToDoWithClientQuery);
+    const { mutate, data, isLoading } = useZact(insertToDo);
 
     return (
         <div className="w-full h-full">
@@ -18,7 +18,7 @@ export default function AddToDo() {
                 const assigned_to = data.get("assigned_to") as string;
                 console.log({ data, title, text, category, due_date, assigned_to });
                 // Todo: fix notes and attachments zod types
-                mutate({ title, text, category, due_date: new Date(due_date), assigned_to, tags: ["fisrt", "second"] })
+                mutate({ title, text, category, due_date: new Date(due_date), assigned_to, tags: ["fisrt", "second"], priority: null })
             }}>
                 <input type="text" placeholder="title" id="title" name="title" />
                 <input type="text" placeholder="text" id="text" name="text" />
