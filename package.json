@@ -30,6 +30,6 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
-    "typescript": "^5.1.0-beta"
+    "typescript": "^5.0.4"
   }
 }
