@@ -17,7 +17,8 @@ export default function AddToDo() {
                 const due_date = data.get("due_date") as string;
                 const assigned_to = data.get("assigned_to") as string;
                 console.log({ data, title, text, category, due_date, assigned_to });
-                mutate({ title, text, category, due_date: new Date(due_date), assigned_to, tags: ["fisrt", "second"], notes: "anoteeeeeeeeeeeeeeeeee" })
+                // Todo: fix notes and attachments zod types
+                mutate({ title, text, category, due_date: new Date(due_date), assigned_to, tags: ["fisrt", "second"] })
             }}>
                 <input type="text" placeholder="title" id="title" name="title" />
                 <input type="text" placeholder="text" id="text" name="text" />
