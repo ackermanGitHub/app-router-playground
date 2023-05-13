@@ -38,9 +38,15 @@ const Navbar = () => {
             </nav>
             <div style={{
                 translate: isDrawerOpen ? "50%" : "0%",
-            }} className="bg-blue-500 top-0 w-screen h-screen absolute -left-full transition-all duration-300">
+            }} className="bg-blue-500 top-0 w-screen h-screen absolute -left-full transition-all duration-300 z-10">
 
                 <button className="bg-blue-500 text-white 🅱️ absolute top-2 right-2 p-4" onClick={() => setIsDrawerOpen(false)}>❌</button>
+            </div>
+            <div style={{
+                display: isDrawerOpen ? "block" : "none",
+            }} onClick={() => {
+                setIsDrawerOpen(false);
+            }} className="top-0 left-0 w-screen h-screen absolute opacity-25 bg-slate-400">
             </div>
         </>
     )
