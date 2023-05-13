@@ -37,10 +37,22 @@ const Navbar = () => {
                 </div>
             </nav>
             <div style={{
-                translate: isDrawerOpen ? "50%" : "0%",
-            }} className="bg-blue-500 top-0 w-screen h-screen absolute -left-full transition-all duration-300 z-10">
+                translate: isDrawerOpen ? "200%" : "0%",
+            }} className="flex flex-col justify-center items-center bg-blue-500 top-0 w-[50vw] h-screen absolute -left-full transition-all duration-300 z-10">
 
                 <button className="bg-blue-500 text-white 🅱️ absolute top-2 right-2 p-4" onClick={() => setIsDrawerOpen(false)}>❌</button>
+                <ul>
+                    <li>
+                        <Link onClick={() => {
+                            setIsDrawerOpen(false);
+                        }} className="text-white text-base" href="/">Home</Link>
+                    </li>
+                    <li>
+                        <Link onClick={() => {
+                            setIsDrawerOpen(false);
+                        }} className="text-white text-base" href="/dashboard">Dashboard</Link>
+                    </li>
+                </ul>
             </div>
             <div style={{
                 display: isDrawerOpen ? "block" : "none",
