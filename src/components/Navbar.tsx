@@ -19,11 +19,6 @@ const Navbar = () => {
                 </Link>
                 <div className="flex items-center gap-3">
                     <button className="bg-blue-400 🅱️ text-white rounded-lg px-4 py-2" onClick={() => {
-                        console.log(user);
-                    }}>
-                        Log User
-                    </button>
-                    <button className="bg-blue-400 🅱️ text-white rounded-lg px-4 py-2" onClick={() => {
                         setIsDrawerOpen(!isDrawerOpen)
                     }}>
                         Drawer
