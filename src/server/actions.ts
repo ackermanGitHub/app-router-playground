@@ -90,6 +90,46 @@ export const updateTodo = async (
   revalidatePath(`/dashboard`);
 };
 
+export const deleteTodo = async (input: { todo_id: number }) => {
+  const client = createClient();
+  await client.connect();
+
+  try {
+    console.log(`
+        DELETE FROM todos
+        WHERE todo_id = ${input.todo_id};
+      `);
+    await client.query(`
+        DELETE FROM todos
+        WHERE todo_id = ${input.todo_id};
+      `);
+  } catch (e) {
+    throw e;
+  }
+
+  revalidatePath(`/dashboard`);
+};
+
+export const deleteTodos = async (input: { todo_ids: number[] }) => {
+  const client = createClient();
+  await client.connect();
+
+  try {
+    console.log(`
+        DELETE FROM todos
+        WHERE todo_id IN (${input.todo_ids.join(',')});
+      `);
+    // await client.query(`
+    //     DELETE FROM todos
+    //     WHERE todo_id IN (${input.todo_ids.join(',')});
+    //   `);
+  } catch (e) {
+    throw e;
+  }
+
+  revalidatePath(`/dashboard`);
+};
+
 /* 
 Bito: Sure, here are some example SQL queries to help you create the tables and populate them with data: 
  
