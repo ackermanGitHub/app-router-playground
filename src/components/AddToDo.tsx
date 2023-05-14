@@ -1,15 +1,14 @@
 "use client"
-import { useZact } from "zact/client";
+import { useTransition } from 'react';
 import { insertToDo } from "@/server/actions";
 import { useAuth } from "@clerk/nextjs";
 
 export default function AddToDo() {
-    const { mutate } = useZact(insertToDo);
     const { isSignedIn, userId } = useAuth();
+    let [isPending, startTransition] = useTransition();
 
     return (
         <div className="m-4 border-orange-600 border-solid border-2 h-full">
-            <h1 className="text-3xl font-bold underline">ToDoForm</h1>
             <form className="flex flex-col my-5 gap-2 w-full h-full" action={(data) => {
                 const title = data.get("title") as string;
                 const text = data.get("text") as string;
@@ -23,9 +22,9 @@ export default function AddToDo() {
                 }
 
                 console.log({ title, text, category, due_date, assigned_to, tags: [tags] });
-
-                mutate({ title, text, category, due_date: new Date(due_date), assigned_to, tags: [tags], priority: null, user_id: userId })
+                startTransition(() => insertToDo({ title, text, category, due_date: new Date(due_date), assigned_to, tags: [tags], priority: null, user_id: userId }))
             }}>
+                {isPending && <div>Loading..</div>}
                 <input className="w-36 border-stone-600 border-solid border mx-auto" type="text" placeholder="title" id="title" name="title" />
                 <input className="w-36 border-stone-600 border-solid border mx-auto" type="text" placeholder="text" id="text" name="text" />
                 <input className="w-36 border-stone-600 border-solid border mx-auto" type="text" placeholder="category" id="category" name="category" />

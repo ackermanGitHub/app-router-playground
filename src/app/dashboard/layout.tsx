@@ -1,3 +1,4 @@
+import { InputProvider } from "@/hooks/useInput"
 
 export const metadata = {
     title: 'Dashboard',
@@ -11,7 +12,9 @@ export default function RootLayout({
 }) {
     return (
         <div className='w-full h-1/2 border-solid border-2 border-red-500'>
-            {children}
+            <InputProvider>
+                {children}
+            </InputProvider>
         </div>
     )
 }

@@ -1,39 +1,10 @@
 'use server';
-import { createClient, sql } from '@vercel/postgres';
+import { createClient } from '@vercel/postgres';
 import { z } from 'zod';
-import { zact } from 'zact/server';
+import { todoInputSchema, absValue } from './common';
+import { revalidatePath } from 'next/cache';
 
-/* 
-CREATE TABLE todos (
-    todo_id SERIAL PRIMARY KEY,
-    user_id TEXT NOT NULL,
-    date_created TIMESTAMP DEFAULT NOW(),
-    title TEXT,
-    text TEXT,
-    category TEXT,
-    priority INTEGER,
-    completed BOOLEAN DEFAULT FALSE,
-    due_date DATE,
-    assigned_to TEXT,
-    notes JSONB,
-    attachments JSONB,
-    tags TEXT[]
-);
-*/
-const toDoSchema = z.object({
-  user_id: z.string().max(32).optional().nullable(),
-  title: z.string().max(32).optional().nullable(),
-  text: z.string().optional().nullable(),
-  category: z.string().optional().nullable(),
-  priority: z.number().int().optional().nullable(),
-  due_date: z.date().optional().nullable(),
-  assigned_to: z.string().optional().nullable(),
-  notes: z.string().optional().nullable(),
-  attachments: z.string().optional().nullable(),
-  tags: z.array(z.string()).optional().nullable(),
-});
-
-export const insertToDo = zact(toDoSchema)(async (input) => {
+export const insertToDo = async (input: z.TypeOf<typeof todoInputSchema>) => {
   const client = createClient();
   await client.connect();
 
@@ -67,97 +38,57 @@ export const insertToDo = zact(toDoSchema)(async (input) => {
     throw e;
   }
 
-  console.log('success');
-  return 'success';
-});
+  revalidatePath(`/dashboard`);
+};
 
-function absValue(
-  value: string[] | Date | number | string | undefined | null
-): string {
-  let res = '';
+export const updateTodo = async (
+  input: z.TypeOf<typeof todoInputSchema> & { todo_id: number }
+) => {
+  const client = createClient();
+  await client.connect();
 
-  switch (typeof value) {
-    case 'string':
-      res = `'${value}'`;
-      break;
-    case 'number':
-      res = `${value}`;
-      break;
-    case 'object':
-      if (value instanceof Date) {
-        res = `'${value.toISOString()}'`;
-      }
-      if (value instanceof Array) {
-        res = `ARRAY[${value.map((value) => absValue(value))}]`;
-      }
-      if (value === null) {
-        res = 'NULL';
-      }
-      break;
-    default:
-      return '';
+  const noNulls = Object.entries(input).filter(([_key, value]) => {
+    if (value !== null) {
+      return true;
+    }
+    return false;
+  });
+
+  const noEmptyStrings = noNulls.filter(([_key, value]) => {
+    if (value !== '') {
+      return true;
+    }
+    return false;
+  });
+
+  const noTodoId = noEmptyStrings.filter(([key, _value]) => {
+    if (key !== 'todo_id') {
+      return true;
+    }
+    return false;
+  });
+
+  const key_value_pairs = noTodoId.map((entry) => {
+    return `${entry[0]} = ${absValue(entry[1])}`;
+  });
+
+  try {
+    console.log(`
+        UPDATE todos
+        SET ${key_value_pairs}
+        WHERE todo_id = ${input.todo_id};
+      `);
+    await client.query(`
+        UPDATE todos
+        SET ${key_value_pairs}
+        WHERE todo_id = ${input.todo_id};
+      `);
+  } catch (e) {
+    throw e;
   }
 
-  return res;
-}
-
-/* 
-Zact - Zod Server ACTions
-We like NextJS Server Actions. We wanted to love them. This package makes them validated and typesafe, so you can use them in things that aren't forms.
-
-npm install zact
-
-Backend
-// action.ts
-"use server";
-
-import { z } from "zod";
-import { zact } from "zact/server";
-export const validatedAction = zact(z.object({ stuff: z.string().min(6) }))(
-  async (input) => {
-    return { message: `hello ${input.stuff}` };
-  }
-);
-Client WITH custom hook
-// component.tsx
-"use client";
-
-import { validatedAction } from "./action";
-import { useZact } from "zact/client";
-
-export const zactTestComponent = () => {
-  const { mutate, data, isRunning } = useZact(validatedAction);
-
-  return (
-    <div>
-      <button onClick={() => mutate({ stuff: "testtestaet" })}>
-        Run server action
-      </button>
-      {isRunning && <div>Loading...</div>}
-      {data?.message}
-    </div>
-  );
+  revalidatePath(`/dashboard`);
 };
-Client WITHOUT custom hook
-Yes you can just import them and call them like promises too
-
-// component.tsx
-"use client";
-
-import { validatedAction } from "./action";
-
-export const zactTestComponent = () => {
-  return (
-    <div>
-      <button onClick={() => {
-        validatedAction({ stuff: "test" }).then((response) => console.log("response!", response));
-      }>
-        Run server action
-      </button>
-    </div>
-  );
-};
-*/
 
 /* 
 Bito: Sure, here are some example SQL queries to help you create the tables and populate them with data: 
