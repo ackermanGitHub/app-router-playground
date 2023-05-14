@@ -15,7 +15,7 @@ export default async function DemoPage() {
     const todos = await getToDos()
 
     return (
-        <div className="container mx-auto py-10">
+        <div className="container mx-auto my-10">
             <DataTable columns={columns} data={todos} />
         </div>
     )

@@ -1,4 +1,6 @@
 "use client"
+import { InputContext } from "@/hooks/useInput";
+import { useContext, useTransition } from "react";
 
 import {
     ColumnDef,
@@ -15,6 +17,7 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
+import { logDev } from "@/utils/functions";
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
@@ -30,6 +33,8 @@ export function DataTable<TData, TValue>({
         columns,
         getCoreRowModel: getCoreRowModel(),
     })
+    const { editInput } = useContext(InputContext)
+    let [isPending, startTransition] = useTransition();
 
     return (
         <div className="rounded-md border">
@@ -60,7 +65,38 @@ export function DataTable<TData, TValue>({
                                 data-state={row.getIsSelected() && "selected"}
                             >
                                 {row.getVisibleCells().map((cell) => (
-                                    <TableCell key={cell.id}>
+                                    <TableCell
+                                        onClick={(event) => {
+                                            event.preventDefault();
+                                            event.stopPropagation();
+                                            const target =
+                                                event.currentTarget;
+                                            if (!target) {
+                                                throw new Error('target not found at ProductsTable');
+                                            }
+                                            const position = {
+                                                x: target.offsetLeft,
+                                                y: target.offsetTop,
+                                            };
+                                            const size = {
+                                                width: target.offsetWidth,
+                                                height: target.offsetHeight,
+                                            };
+                                            editInput.setLeft(position.x);
+                                            editInput.setTop(position.y);
+                                            editInput.setHeight(size.height);
+                                            editInput.setWidth(size.width);
+                                            editInput.setValue("");
+                                            editInput.setActive(true);
+                                            editInput.setCallback(() => {
+                                                return (value: string) => {
+                                                    // startTransition(() => updateTodo({ title: value, todo_id: todo.todo_id }))
+                                                    logDev("data-table callback", value)
+                                                }
+                                            })
+
+                                        }}
+                                        key={cell.id}>
                                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
                                     </TableCell>
                                 ))}
