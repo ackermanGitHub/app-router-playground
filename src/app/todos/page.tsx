@@ -6,6 +6,7 @@ import { QueryResult, sql } from "@vercel/postgres"
 const getToDos = async () => {
     const res: QueryResult = await sql`
         SELECT * FROM todos
+        ORDER BY todo_id ASC
     `
     const todos = todosArraySchema.parseAsync(res.rows);
     return todos;
