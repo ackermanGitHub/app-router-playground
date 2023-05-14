@@ -45,7 +45,7 @@ const Navbar = () => {
                     <li>
                         <Link onClick={() => {
                             setIsDrawerOpen(false);
-                        }} className="text-white text-base" href="/dashboard">Dashboard</Link>
+                        }} className="text-white text-base" href="/todos">ToDos</Link>
                     </li>
                 </ul>
             </div>
