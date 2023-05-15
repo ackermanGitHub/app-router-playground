@@ -14,39 +14,49 @@ const Navbar = () => {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false)
     return (
         <>
-            <nav className="flex items-center justify-between border-2 h-16 px-4 py-2">
+            <nav className="flex items-center justify-between border-b-2 h-16 px-4 py-2">
                 <Button variant="outline" className="🅱️" onClick={() => {
                     setIsDrawerOpen(!isDrawerOpen)
                 }}>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
-
                 </Button>
                 <div className="flex items-center gap-3">
                     <SignedIn>
                         <UserButton />
                     </SignedIn>
                     <SignedOut>
-                        <Link href="/sign-in" className="bg-blue-400 🅱️ text-white rounded-lg px-4 py-2">Sign In</Link>
+                        <Link href="/sign-in" >
+                            <Button variant="outline" className="🅱️">
+                                Sign In
+                            </Button>
+                        </Link>
                     </SignedOut>
                 </div>
             </nav>
             <div style={{
                 translate: isDrawerOpen ? "200%" : "0%",
-            }} className="flex flex-col justify-center items-center bg-blue-500 top-0 w-[50vw] h-screen absolute -left-full transition-all duration-300 z-20">
-
-                <button className="bg-blue-500 text-white 🅱️ absolute top-2 right-2 p-4" onClick={() => setIsDrawerOpen(false)}>❌</button>
+            }} className="flex flex-col justify-center bg-secondary items-center top-0 w-[50vw] h-screen absolute -left-full transition-all duration-300 z-20">
+                <button className="🅱️ absolute top-2 right-2 p-4" onClick={() => setIsDrawerOpen(false)}>❌</button>
                 <ul>
                     <li>
                         <Link onClick={() => {
                             setIsDrawerOpen(false);
-                        }} className="text-white text-base" href="/">Home</Link>
+                        }} href="/">
+                            <Button variant="outline" className="🅱️">
+                                Home
+                            </Button>
+                        </Link>
                     </li>
                     <li>
                         <Link onClick={() => {
                             setIsDrawerOpen(false);
-                        }} className="text-white text-base" href="/todos">ToDos</Link>
+                        }} href="/todos">
+                            <Button variant="outline" className="🅱️">
+                                ToDos
+                            </Button>
+                        </Link>
                     </li>
                 </ul>
             </div>

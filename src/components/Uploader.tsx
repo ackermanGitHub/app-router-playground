@@ -6,6 +6,9 @@ import { ourFileRouter } from "@/app/api/uploadthing/core";
 import { genUploader } from "uploadthing/client";
 
 import Divider from "./Divider";
+import { Button } from "./ui/button";
+import { Label } from "./ui/label";
+import { Input } from "./ui/input";
 
 export function MultiUploader() {
     const inputRef = useRef<HTMLInputElement>(null);
@@ -26,16 +29,19 @@ export function MultiUploader() {
         <div className="w-full flex flex-col items-center justify-center">
             <div className="my-4"></div>
             <div className="flex w-full items-center justify-center gap-2">
-                <label htmlFor="file-upload" className="bg-blue-500 🅱️ text-white rounded-lg px-4 py-2">Select Files</label>
-                <input className="hidden" id="file-upload" ref={inputRef} type="file" accept="image/*" onChange={handleFileSelect} multiple />
-                <button
-                    className="bg-blue-500 🅱️ text-white rounded-lg px-4 py-2"
+                <div className="grid py-2 h-10 px-4 border-input cursor-pointer border rounded-md max-w-sm items-center gap-1.5">
+                    <Label htmlFor="file-upload" className="🅱️">Select Files</Label>
+                    <Input className="hidden" id="file-upload" ref={inputRef} type="file" accept="image/*" onChange={handleFileSelect} multiple />
+                </div>
+                <Button
+                    className="🅱️"
+                    variant="outline"
                     onClick={() => {
                         uploader(selectedFiles, "imageUploader")
                     }}
                 >
                     Upload
-                </button>
+                </Button>
             </div>
             <Divider />
             <div className="flex w-full justify-center flex-wrap gap-2">

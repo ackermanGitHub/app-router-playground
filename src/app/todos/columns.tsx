@@ -48,21 +48,27 @@ export const columns: ColumnDef<z.infer<typeof todoSchema>>[] = [
     },
 ]
 
+const tagsList = [
+    "To Do",
+    "Doing",
+    "Done"
+]
+
 function TagCell({ value, todo_id }: { value: string, todo_id: number }) {
     const [, startTransition] = useTransition()
     return (
         <Select>
-            <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Select a fruit" />
+            <SelectTrigger className="w-[80px]">
+                <SelectValue placeholder={value} />
             </SelectTrigger>
             <SelectContent>
                 <SelectGroup>
-                    <SelectLabel>Fruits</SelectLabel>
-                    <SelectItem value="apple">Apple</SelectItem>
-                    <SelectItem value="banana">Banana</SelectItem>
-                    <SelectItem value="blueberry">Blueberry</SelectItem>
-                    <SelectItem value="grapes">Grapes</SelectItem>
-                    <SelectItem value="pineapple">Pineapple</SelectItem>
+                    <SelectLabel>Tags</SelectLabel>
+                    {
+                        tagsList.filter(tag => tag !== value).map(tag => (
+                            <SelectItem key={tag} value={tag}>{tag}</SelectItem>
+                        ))
+                    }
                 </SelectGroup>
             </SelectContent>
             {/* <select
