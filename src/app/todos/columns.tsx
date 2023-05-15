@@ -31,10 +31,9 @@ export const columns: ColumnDef<z.infer<typeof todoSchema>>[] = [
         accessorKey: "date_created",
         header: "Date Created",
         cell({ getValue }) {
-            const date = getValue<Date>()
             return (
                 <div className="text-sm text-gray-500">
-                    {`${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`}
+                    {getValue<Date>().toLocaleString("en-US")}
                 </div>
             )
         },

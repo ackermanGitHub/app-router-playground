@@ -78,11 +78,11 @@ export const updateTodo = async (
         SET ${key_value_pairs}, last_modified = current_timestamp
         WHERE todo_id = ${input.todo_id};
       `);
-    await client.query(`
-        UPDATE todos
-        SET ${key_value_pairs}, last_modified = current_timestamp
-        WHERE todo_id = ${input.todo_id};
-      `);
+    //await client.query(`
+    //    UPDATE todos
+    //    SET ${key_value_pairs}, last_modified = current_timestamp
+    //    WHERE todo_id = ${input.todo_id};
+    //  `);
   } catch (e) {
     throw e;
   }
