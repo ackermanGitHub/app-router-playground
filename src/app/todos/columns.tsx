@@ -31,9 +31,10 @@ export const columns: ColumnDef<z.infer<typeof todoSchema>>[] = [
         accessorKey: "date_created",
         header: "Date Created",
         cell({ getValue }) {
+            const date = getValue<Date>()
             return (
                 <div className="text-sm text-gray-500">
-                    {getValue<Date>().toLocaleString("en-US")}
+                    {`${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`}
                 </div>
             )
         },
@@ -85,9 +86,13 @@ function TitleCell({ value, todo_id }: { value: string, todo_id: number }) {
             editInput.setValue(value);
             editInput.setActive(true);
             editInput.setCallback(() => {
-                return (value: string) => {
-                    startTransition(() => updateTodo({ title: value, todo_id: todo_id }))
-                    logDev("data-table callback", value)
+                return (title: string) => {
+                    if (title !== value) {
+                        startTransition(() => updateTodo({ title, todo_id: todo_id }))
+                        logDev("✅✅✅ title update done", title)
+                    } else {
+                        logDev("❌❌❌ title update not done")
+                    }
                 }
             })
 

@@ -80,7 +80,7 @@ export const InputProvider: React.FC<{ children: React.ReactNode }> = ({ childre
                 display: `${active ? 'block' : 'none'}`,
             }} onClick={() => {
                 callback(value)
-                logDev("close input callback executed");
+                logDev("🧙‍♂️ close input callback executed");
                 setActive(false);
             }} className="absolute top-0 left-0 h-screen w-screen bg-black opacity-50">
 
