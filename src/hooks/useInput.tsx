@@ -1,5 +1,5 @@
 "use client"
-import { useState, createContext } from "react"
+import { useState, createContext, useContext } from "react"
 import { Input } from "@/components/ui/input";
 import { logDev } from "@/utils/functions";
 
@@ -57,31 +57,44 @@ export const InputProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
     return (
         <InputContext.Provider value={{ inputProps, editInput }}>
-            <Input
-                type={type}
-                onChange={(e) => {
-                    editInput.setValue(e.target.value);
-                }}
-                style={{
-                    left,
-                    top,
-                    height,
-                    width,
-                    display: `${active ? 'block' : 'none'}`,
-                }}
-                value={value}
-                className="absolute border-stone-600 border-solid border shadow-lg z-10"
-            />
-            {children}
+            <div className="relative w-full h-full">
+                <Input
+                    type={type}
+                    onChange={(e) => {
+                        editInput.setValue(e.target.value);
+                    }}
+                    style={{
+                        left,
+                        top,
+                        height,
+                        width,
+                        display: `${active ? 'block' : 'none'}`,
+                    }}
+                    className="absolute bg-white text-sm p-4 z-10 text-gray-500"
+                    value={value}
+                />
+
+                {children}
+            </div>
             <div style={{
                 display: `${active ? 'block' : 'none'}`,
             }} onClick={() => {
                 callback(value)
                 logDev("close input callback executed");
                 setActive(false);
-            }} className="absolute top-0 left-0 h-full w-full bg-black opacity-50">
+            }} className="absolute top-0 left-0 h-screen w-screen bg-black opacity-50">
 
             </div>
         </InputContext.Provider>
     )
+}
+
+export const useInput = () => {
+    const context = useContext(InputContext);
+
+    if (!context) {
+        throw new Error('use Toast must be used within a ToastProvider');
+    }
+
+    return context;
 }
