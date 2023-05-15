@@ -33,7 +33,7 @@ const Navbar = () => {
             </nav>
             <div style={{
                 translate: isDrawerOpen ? "200%" : "0%",
-            }} className="flex flex-col justify-center items-center bg-blue-500 top-0 w-[50vw] h-screen absolute -left-full transition-all duration-300 z-10">
+            }} className="flex flex-col justify-center items-center bg-blue-500 top-0 w-[50vw] h-screen absolute -left-full transition-all duration-300 z-20">
 
                 <button className="bg-blue-500 text-white 🅱️ absolute top-2 right-2 p-4" onClick={() => setIsDrawerOpen(false)}>❌</button>
                 <ul>
