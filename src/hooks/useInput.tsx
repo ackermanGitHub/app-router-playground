@@ -59,7 +59,7 @@ export const InputProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         <InputContext.Provider value={{ inputProps, editInput }}>
             <div className="relative w-full h-full">
                 <Input
-                    type={type}
+                    type="text"
                     onChange={(e) => {
                         editInput.setValue(e.target.value);
                     }}
@@ -70,7 +70,7 @@ export const InputProvider: React.FC<{ children: React.ReactNode }> = ({ childre
                         width,
                         display: `${active ? 'block' : 'none'}`,
                     }}
-                    className="absolute bg-white text-sm p-4 z-10 text-gray-500"
+                    className="absolute bg-secondary text-primary p-4 z-10"
                     value={value}
                 />
 

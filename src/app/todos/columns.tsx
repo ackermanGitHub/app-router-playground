@@ -1,5 +1,4 @@
 "use client"
-
 import { ColumnDef } from "@tanstack/react-table"
 import { todoSchema } from "@/server/common"
 import { z } from "zod"
@@ -7,6 +6,15 @@ import { useInput } from "@/hooks/useInput";
 import { logDev } from "@/utils/functions";
 import { updateTodo } from "@/server/actions";
 import { useTransition } from "react";
+import {
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectLabel,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select"
 
 export const columns: ColumnDef<z.infer<typeof todoSchema>>[] = [
     {
@@ -32,7 +40,7 @@ export const columns: ColumnDef<z.infer<typeof todoSchema>>[] = [
         header: "Date Created",
         cell({ getValue }) {
             return (
-                <div className="text-sm text-gray-500">
+                <div className="text-primary">
                     {getValue<Date>().toLocaleString("en-US")}
                 </div>
             )
@@ -43,18 +51,33 @@ export const columns: ColumnDef<z.infer<typeof todoSchema>>[] = [
 function TagCell({ value, todo_id }: { value: string, todo_id: number }) {
     const [, startTransition] = useTransition()
     return (
-        <select
+        <Select>
+            <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Select a fruit" />
+            </SelectTrigger>
+            <SelectContent>
+                <SelectGroup>
+                    <SelectLabel>Fruits</SelectLabel>
+                    <SelectItem value="apple">Apple</SelectItem>
+                    <SelectItem value="banana">Banana</SelectItem>
+                    <SelectItem value="blueberry">Blueberry</SelectItem>
+                    <SelectItem value="grapes">Grapes</SelectItem>
+                    <SelectItem value="pineapple">Pineapple</SelectItem>
+                </SelectGroup>
+            </SelectContent>
+            {/* <select
             onChange={(event) => {
                 event.preventDefault();
                 event.stopPropagation();
                 logDev("data-table callback", event.target.value)
             }}
-            defaultValue="To Do" className="bg-transparent"
+            defaultValue="To Do" className="bg-transparent text-primary decoration-transparent"
         >
             <option value="To Do">To Do</option>
             <option value="Doing">Doing</option>
             <option value="Done">Done</option>
-        </select>
+        </select> */}
+        </Select>
     )
 }
 
@@ -95,8 +118,9 @@ function TitleCell({ value, todo_id }: { value: string, todo_id: number }) {
                 }
             })
 
-        }} className="text-sm w-fit min-w-[80px] min-h-[20px] text-gray-500">
+        }} className="text-primary w-fit min-w-[80px] min-h-[20px]">
             {value}
         </div>
     )
 }
+

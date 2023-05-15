@@ -17,8 +17,10 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <html lang="en">
-        <body className={`${inter.className} h-screen relative`}>
+      <html style={{
+        colorScheme: "dark"
+      }} className='dark' lang="en">
+        <body className={`${inter.className} bg-secondary h-screen relative`}>
           <header className='w-auto'>
             <Navbar />
           </header>
