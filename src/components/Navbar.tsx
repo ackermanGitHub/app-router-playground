@@ -53,7 +53,7 @@ const Navbar = () => {
                 display: isDrawerOpen ? "block" : "none",
             }} onClick={() => {
                 setIsDrawerOpen(false);
-            }} className="top-0 left-0 w-screen h-screen absolute opacity-25 bg-slate-400">
+            }} className="top-0 left-0 w-screen h-screen absolute z-10 opacity-25 bg-slate-400">
             </div>
         </>
     )
