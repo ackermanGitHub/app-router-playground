@@ -1,6 +1,7 @@
 "use client"
 import { InputContext } from "@/hooks/useInput";
 import { useContext, useTransition } from "react";
+import { motion } from 'framer-motion';
 
 import {
     ColumnDef,
@@ -59,43 +60,13 @@ export function DataTable<TData, TValue>({
                 </TableHeader>
                 <TableBody>
                     {table.getRowModel().rows?.length ? (
-                        table.getRowModel().rows.map((row) => (
+                        table.getRowModel().rows.map((row, index) => (
                             <TableRow
                                 key={row.id}
                                 data-state={row.getIsSelected() && "selected"}
                             >
                                 {row.getVisibleCells().map((cell) => (
                                     <TableCell
-                                        onClick={(event) => {
-                                            event.preventDefault();
-                                            event.stopPropagation();
-                                            const target =
-                                                event.currentTarget;
-                                            if (!target) {
-                                                throw new Error('target not found at ProductsTable');
-                                            }
-                                            const position = {
-                                                x: target.offsetLeft,
-                                                y: target.offsetTop,
-                                            };
-                                            const size = {
-                                                width: target.offsetWidth,
-                                                height: target.offsetHeight,
-                                            };
-                                            editInput.setLeft(position.x);
-                                            editInput.setTop(position.y);
-                                            editInput.setHeight(size.height);
-                                            editInput.setWidth(size.width);
-                                            editInput.setValue("");
-                                            editInput.setActive(true);
-                                            editInput.setCallback(() => {
-                                                return (value: string) => {
-                                                    // startTransition(() => updateTodo({ title: value, todo_id: todo.todo_id }))
-                                                    logDev("data-table callback", value)
-                                                }
-                                            })
-
-                                        }}
                                         key={cell.id}>
                                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
                                     </TableCell>

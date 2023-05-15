@@ -3,6 +3,8 @@ import { DataTable } from "./data-table"
 import { todosArraySchema } from "@/server/common"
 import { QueryResult, sql } from "@vercel/postgres"
 
+export const revalidate = 3600; // revalidate every hour
+
 const getToDos = async () => {
     const res: QueryResult = await sql`
         SELECT * FROM todos
@@ -16,8 +18,6 @@ export default async function DemoPage() {
     const todos = await getToDos()
 
     return (
-        <div className="container mx-auto my-10">
-            <DataTable columns={columns} data={todos} />
-        </div>
+        <DataTable columns={columns} data={todos} />
     )
 }

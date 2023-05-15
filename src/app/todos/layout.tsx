@@ -11,10 +11,8 @@ export default function ToDosLayout({
     children: React.ReactNode
 }) {
     return (
-        <div className="relative">
-            <InputProvider>
-                {children}
-            </InputProvider>
-        </div>
+        <InputProvider>
+            {children}
+        </InputProvider>
     )
 }
