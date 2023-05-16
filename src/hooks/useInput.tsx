@@ -1,5 +1,5 @@
 "use client"
-import { useState, createContext, useContext } from "react"
+import { useState, createContext, useContext, useRef } from "react"
 import { Input } from "@/components/ui/input";
 import { logDev } from "@/utils/functions";
 
@@ -22,7 +22,6 @@ interface EditInput {
     setTop: React.Dispatch<React.SetStateAction<number>>;
     setWidth: React.Dispatch<React.SetStateAction<number>>;
     setHeight: React.Dispatch<React.SetStateAction<number>>;
-    setValue: React.Dispatch<React.SetStateAction<string>>;
     setId: React.Dispatch<React.SetStateAction<number>>;
     setType: React.Dispatch<React.SetStateAction<string>>;
     setColumn: React.Dispatch<React.SetStateAction<string>>;
@@ -37,7 +36,7 @@ export const InputProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     const [top, setTop] = useState(0);
     const [width, setWidth] = useState(0);
     const [height, setHeight] = useState(0);
-    const [value, setValue] = useState('');
+    const value = useRef('');
     const [id, setId] = useState(-1);
     const [type, setType] = useState('');
     const [column, setColumn] = useState('');
@@ -47,28 +46,31 @@ export const InputProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         }
     });
 
-    const DinamicInput = () => <Input
-        type="text"
-        onChange={(e) => {
-            editInput.setValue(e.target.value);
-        }}
-        style={{
-            left,
-            top,
-            height,
-            width,
-            display: `${active ? 'block' : 'none'}`,
-        }}
-        className="absolute bg-secondary text-primary p-4 z-10"
-        value={value}
-    />
+    const DinamicInput = () => {
+        return (
+            <Input
+                type="text"
+                onChange={(e) => {
+                    value.current = e.target.value;
+                }}
+                style={{
+                    left,
+                    top,
+                    height,
+                    width,
+                    display: `${active ? 'block' : 'none'}`,
+                }}
+                className="absolute bg-secondary text-primary p-4 z-10"
+            />
+        );
+    }
 
     const inputProps = {
-        active, left, top, width, height, value, id, type, column, callback
+        active, left, top, width, height, value: value.current, id, type, column, callback
     }
 
     const editInput = {
-        setActive, setLeft, setTop, setWidth, setHeight, setValue, setId, setType, setColumn, setCallback
+        setActive, setLeft, setTop, setWidth, setHeight, setId, setType, setColumn, setCallback
     }
 
     return (
@@ -79,7 +81,7 @@ export const InputProvider: React.FC<{ children: React.ReactNode }> = ({ childre
                     display: `${active ? 'block' : 'none'}`,
                 }}
                 onClick={() => {
-                    callback(value)
+                    callback(value.current)
                     setActive(false);
                 }}
                 className="absolute top-0 left-0 h-full w-full bg-black opacity-50"

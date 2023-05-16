@@ -54,14 +54,14 @@ export const updateTodo = async (
     return false;
   });
 
-  const noEmptyStrings = noNulls.filter(([_key, value]) => {
-    if (value !== '') {
-      return true;
-    }
-    return false;
-  });
+  //const noEmptyStrings = noNulls.filter(([_key, value]) => {
+  //  if (value !== '') {
+  //    return true;
+  //  }
+  //  return false;
+  //});
 
-  const noTodoId = noEmptyStrings.filter(([key, _value]) => {
+  const noTodoId = noNulls.filter(([key, _value]) => {
     if (key !== 'todo_id') {
       return true;
     }
@@ -78,11 +78,11 @@ export const updateTodo = async (
         SET ${key_value_pairs}, last_modified = current_timestamp
         WHERE todo_id = ${input.todo_id};
       `);
-    //await client.query(`
-    //    UPDATE todos
-    //    SET ${key_value_pairs}, last_modified = current_timestamp
-    //    WHERE todo_id = ${input.todo_id};
-    //  `);
+    await client.query(`
+        UPDATE todos
+        SET ${key_value_pairs}, last_modified = current_timestamp
+        WHERE todo_id = ${input.todo_id};
+      `);
   } catch (e) {
     throw e;
   }
