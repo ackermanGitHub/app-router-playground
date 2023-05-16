@@ -21,7 +21,7 @@ export default function RootLayout({
         colorScheme: "dark"
       }} className='dark' lang="en">
         <body className={`${inter.className} bg-secondary h-screen relative`}>
-          <header className='w-auto'>
+          <header className='w-auto h-16'>
             <Navbar />
           </header>
           <main className='w-full h-auto'>

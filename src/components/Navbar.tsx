@@ -14,7 +14,7 @@ const Navbar = () => {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false)
     return (
         <>
-            <nav className="flex items-center justify-between border-b-2 h-16 px-4 py-2">
+            <nav className="flex items-center justify-between border-b-2 h-full px-4 py-2">
                 <Button variant="outline" className="🅱️" onClick={() => {
                     setIsDrawerOpen(!isDrawerOpen)
                 }}>
@@ -24,7 +24,7 @@ const Navbar = () => {
                 </Button>
                 <div className="flex items-center gap-3">
                     <SignedIn>
-                        <UserButton />
+                        <UserButton afterSignOutUrl="/sign-in" />
                     </SignedIn>
                     <SignedOut>
                         <Link href="/sign-in" >
@@ -37,7 +37,7 @@ const Navbar = () => {
             </nav>
             <div style={{
                 translate: isDrawerOpen ? "200%" : "0%",
-            }} className="bg-secondary top-0 w-[50vw] h-screen absolute -left-full transition-all duration-300 p-20 z-20">
+            }} className="border-r-2 bg-secondary top-0 w-[50vw] h-screen absolute -left-full transition-all duration-300 p-20 z-20">
                 <Button variant="outline" className="🅱️ absolute top-2 right-2 p-4" onClick={() => setIsDrawerOpen(false)}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4"><line x1="18" x2="6" y1="6" y2="18"></line><line x1="6" x2="18" y1="6" y2="18"></line></svg>
                 </Button>
@@ -66,7 +66,7 @@ const Navbar = () => {
                 display: isDrawerOpen ? "block" : "none",
             }} onClick={() => {
                 setIsDrawerOpen(false);
-            }} className="top-0 left-0 w-screen h-screen absolute z-10 opacity-25 bg-slate-400">
+            }} data-state={isDrawerOpen ? "open" : "closed"} className="absolute z-10 top-0 left-0 h-full w-full bg-background/80 backdrop-blur-sm transition-all duration-100 data-[state=closed]:animate-out data-[state=closed]:fade-out data-[state=open]:fade-in">
             </div>
         </>
     )
