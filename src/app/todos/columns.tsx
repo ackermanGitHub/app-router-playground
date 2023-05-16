@@ -90,7 +90,7 @@ function TagCell({ todo }: { todo: z.infer<typeof todoSchema> }) {
 }
 
 function TitleCell({ todo }: { todo: z.infer<typeof todoSchema> }) {
-    const { editInput, inputProps } = useInput()
+    const { editInput } = useInput()
     const [, startTransition] = useTransition()
     return (
         <div className="flex items-center justify-between gap-2 text-primary w-full h-full min-w-[80px] min-h-[20px]">
@@ -126,12 +126,13 @@ function TitleCell({ todo }: { todo: z.infer<typeof todoSchema> }) {
                 editInput.setTop(position.y);
                 editInput.setHeight(size.height);
                 editInput.setWidth(size.width);
-                inputProps.value = todo.title || "";
+                editInput.setValue(todo.title || "");
                 editInput.setActive(true);
                 editInput.setCallback(() => {
                     return (title: string) => {
                         if (title !== todo.title) {
                             startTransition(() => updateTodo({ title, todo_id: todo.todo_id }))
+                            todo.title = title;
                             logDev("✅✅✅ title update done", title)
                         } else {
                             logDev("❌❌❌ title update not done")

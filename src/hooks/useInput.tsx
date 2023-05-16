@@ -3,32 +3,20 @@ import { useState, createContext, useContext, useRef } from "react"
 import { Input } from "@/components/ui/input";
 import { logDev } from "@/utils/functions";
 
-interface InputProps {
-    active: boolean;
-    left: number;
-    top: number;
-    width: number;
-    height: number;
-    value: string;
-    id: number;
-    type: string;
-    column: string;
-    callback: (value: string) => void;
-}
-
 interface EditInput {
     setActive: React.Dispatch<React.SetStateAction<boolean>>;
     setLeft: React.Dispatch<React.SetStateAction<number>>;
     setTop: React.Dispatch<React.SetStateAction<number>>;
     setWidth: React.Dispatch<React.SetStateAction<number>>;
     setHeight: React.Dispatch<React.SetStateAction<number>>;
-    setId: React.Dispatch<React.SetStateAction<number>>;
-    setType: React.Dispatch<React.SetStateAction<string>>;
-    setColumn: React.Dispatch<React.SetStateAction<string>>;
+    setValue: (newValue: string) => void;
+    // setId: React.Dispatch<React.SetStateAction<number>>;
+    // setType: React.Dispatch<React.SetStateAction<string>>;
+    // setColumn: React.Dispatch<React.SetStateAction<string>>;
     setCallback: React.Dispatch<React.SetStateAction<(value: string) => void>>;
 }
 
-export const InputContext = createContext({} as { inputProps: InputProps, editInput: EditInput, DinamicInput: () => JSX.Element });
+export const InputContext = createContext({} as { editInput: EditInput, DinamicInput: () => JSX.Element });
 
 export const InputProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [active, setActive] = useState(false);
@@ -37,19 +25,22 @@ export const InputProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     const [width, setWidth] = useState(0);
     const [height, setHeight] = useState(0);
     const value = useRef('');
-    const [id, setId] = useState(-1);
-    const [type, setType] = useState('');
-    const [column, setColumn] = useState('');
+    // const [id, setId] = useState(-1);
+    // const [type, setType] = useState('');
+    // const [column, setColumn] = useState('');
     const [callback, setCallback] = useState(() => {
         return (value: string) => {
             logDev("default close input callback");
         }
     });
 
+    const inputRef = useRef<HTMLInputElement>(null);
+
     const DinamicInput = () => {
         return (
             <Input
                 type="text"
+                ref={inputRef}
                 onChange={(e) => {
                     value.current = e.target.value;
                 }}
@@ -60,21 +51,27 @@ export const InputProvider: React.FC<{ children: React.ReactNode }> = ({ childre
                     width,
                     display: `${active ? 'block' : 'none'}`,
                 }}
+                defaultValue={value.current}
                 className="absolute bg-secondary text-primary p-4 z-10"
             />
         );
     }
 
-    const inputProps = {
-        active, left, top, width, height, value: value.current, id, type, column, callback
-    }
-
     const editInput = {
-        setActive, setLeft, setTop, setWidth, setHeight, setId, setType, setColumn, setCallback
+        setActive,
+        setLeft,
+        setTop,
+        setWidth,
+        setHeight,
+        setValue: (newValue: string) => {
+            value.current = newValue;
+        },
+        setCallback,
+        /* setId, setType, setColumn */
     }
 
     return (
-        <InputContext.Provider value={{ inputProps, editInput, DinamicInput }}>
+        <InputContext.Provider value={{ editInput, DinamicInput }}>
             {children}
             <div
                 style={{
