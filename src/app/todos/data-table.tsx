@@ -34,11 +34,12 @@ export function DataTable<TData, TValue>({
         columns,
         getCoreRowModel: getCoreRowModel(),
     })
-    const { editInput } = useContext(InputContext)
+    const { editInput, DinamicInput } = useContext(InputContext)
     let [isPending, startTransition] = useTransition();
 
     return (
-        <div className="rounded-md border">
+        <div className="relative rounded-md border">
+            <DinamicInput />
             <Table>
                 <TableHeader>
                     {table.getHeaderGroups().map((headerGroup) => (

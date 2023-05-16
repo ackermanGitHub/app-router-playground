@@ -29,7 +29,7 @@ interface EditInput {
     setCallback: React.Dispatch<React.SetStateAction<(value: string) => void>>;
 }
 
-export const InputContext = createContext({} as { inputProps: InputProps, editInput: EditInput });
+export const InputContext = createContext({} as { inputProps: InputProps, editInput: EditInput, DinamicInput: () => JSX.Element });
 
 export const InputProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [active, setActive] = useState(false);
@@ -47,6 +47,22 @@ export const InputProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         }
     });
 
+    const DinamicInput = () => <Input
+        type="text"
+        onChange={(e) => {
+            editInput.setValue(e.target.value);
+        }}
+        style={{
+            left,
+            top,
+            height,
+            width,
+            display: `${active ? 'block' : 'none'}`,
+        }}
+        className="absolute bg-secondary text-primary p-4 z-10"
+        value={value}
+    />
+
     const inputProps = {
         active, left, top, width, height, value, id, type, column, callback
     }
@@ -56,34 +72,18 @@ export const InputProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     }
 
     return (
-        <InputContext.Provider value={{ inputProps, editInput }}>
-            <div className="relative w-full h-full">
-                <Input
-                    type="text"
-                    onChange={(e) => {
-                        editInput.setValue(e.target.value);
-                    }}
-                    style={{
-                        left,
-                        top,
-                        height,
-                        width,
-                        display: `${active ? 'block' : 'none'}`,
-                    }}
-                    className="absolute bg-secondary text-primary p-4 z-10"
-                    value={value}
-                />
-
-                {children}
-            </div>
-            <div style={{
-                display: `${active ? 'block' : 'none'}`,
-            }} onClick={() => {
-                callback(value)
-                logDev("🧙‍♂️ close input callback executed");
-                setActive(false);
-            }} className="absolute top-0 left-0 h-screen w-screen bg-black opacity-50">
-
+        <InputContext.Provider value={{ inputProps, editInput, DinamicInput }}>
+            {children}
+            <div
+                style={{
+                    display: `${active ? 'block' : 'none'}`,
+                }}
+                onClick={() => {
+                    callback(value)
+                    setActive(false);
+                }}
+                className="absolute top-0 left-0 h-full w-full bg-black opacity-50"
+            >
             </div>
         </InputContext.Provider>
     )
