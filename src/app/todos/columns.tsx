@@ -64,16 +64,17 @@ const tagsList = [
 
 function TagCell({ todo }: { todo: z.infer<typeof todoSchema> }) {
     const [, startTransition] = useTransition()
+    const tag = todo.tags ? todo.tags[0] : "Select"
     return (
-        <Select>
-            <SelectTrigger className="w-[80px]">
-                <SelectValue placeholder={todo.tags ? todo.tags[0] : "Select"} />
+        <Select defaultValue={tag}>
+            <SelectTrigger className="w-[90px]">
+                <SelectValue placeholder={tag} />
             </SelectTrigger>
             <SelectContent>
                 <SelectGroup>
-                    <SelectLabel>Tags</SelectLabel>
+                    <SelectLabel>Tags:</SelectLabel>
                     {
-                        tagsList.filter(tag => todo.tags && tag !== todo.tags[0]).map(tag => (
+                        tagsList.map(tag => (
                             <SelectItem key={tag} value={tag}>{tag}</SelectItem>
                         ))
                     }
@@ -92,7 +93,7 @@ function TitleCell({ todo }: { todo: z.infer<typeof todoSchema> }) {
                 <SheetTrigger>{todo.title ? todo.title : "Select"}</SheetTrigger>
                 <SheetContent>
                     <SheetHeader>
-                        <SheetTitle>{ }</SheetTitle>
+                        <SheetTitle>{todo.title}</SheetTitle>
                         <SheetDescription>
                             This action cannot be undone. This will permanently delete your account
                             and remove your data from our servers.
