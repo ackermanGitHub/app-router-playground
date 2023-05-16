@@ -1,4 +1,3 @@
-import { InputProvider } from "@/hooks/useInput"
 
 export const metadata = {
     title: 'ToDos',
@@ -11,8 +10,8 @@ export default function ToDosLayout({
     children: React.ReactNode
 }) {
     return (
-        <InputProvider>
+        <>
             {children}
-        </InputProvider>
+        </>
     )
 }

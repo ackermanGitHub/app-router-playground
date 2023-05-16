@@ -1,5 +1,4 @@
 "use client"
-import { InputContext } from "@/hooks/useInput";
 import { useContext } from "react";
 
 import {
@@ -17,6 +16,7 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
+import { log } from "console";
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
@@ -32,11 +32,9 @@ export function DataTable<TData, TValue>({
         columns,
         getCoreRowModel: getCoreRowModel(),
     })
-    const { DinamicInput } = useContext(InputContext)
 
     return (
         <div className="relative rounded-md border">
-            <DinamicInput />
             <Table>
                 <TableHeader>
                     {table.getHeaderGroups().map((headerGroup) => (
@@ -60,6 +58,9 @@ export function DataTable<TData, TValue>({
                     {table.getRowModel().rows?.length ? (
                         table.getRowModel().rows.map((row, index) => (
                             <TableRow
+                                onClick={() => {
+                                    console.log(row.original)
+                                }}
                                 key={row.id}
                                 data-state={row.getIsSelected() && "selected"}
                             >
