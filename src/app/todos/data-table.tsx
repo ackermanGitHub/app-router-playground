@@ -1,7 +1,6 @@
 "use client"
 import { InputContext } from "@/hooks/useInput";
-import { useContext, useTransition } from "react";
-import { motion } from 'framer-motion';
+import { useContext } from "react";
 
 import {
     ColumnDef,
@@ -18,7 +17,6 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-import { logDev } from "@/utils/functions";
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
@@ -34,8 +32,7 @@ export function DataTable<TData, TValue>({
         columns,
         getCoreRowModel: getCoreRowModel(),
     })
-    const { editInput, DinamicInput } = useContext(InputContext)
-    let [isPending, startTransition] = useTransition();
+    const { DinamicInput } = useContext(InputContext)
 
     return (
         <div className="relative rounded-md border">
