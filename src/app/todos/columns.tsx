@@ -88,16 +88,27 @@ function TagCell({ todo }: { todo: z.infer<typeof todoSchema> }) {
 }
 
 function TitleCell({ todo }: { todo: z.infer<typeof todoSchema> }) {
-    // const [, startTransition] = useTransition()
+    const [, startTransition] = useTransition()
     return (
         <Sheet >
             <SheetTrigger>{todo.title ? todo.title : "No tittle"}</SheetTrigger>
             <SheetContent>
                 <SheetHeader>
-                    <SheetTitle>{todo.title}</SheetTitle>
-                    <SheetDescription>
-                        This action cannot be undone. This will permanently delete your account
-                        and remove your data from our servers.
+                    <SheetTitle
+                        contentEditable
+                        onInput={(e) => {
+                            startTransition(() => updateTodo({ title: e.currentTarget.innerText, todo_id: todo.todo_id }))
+                        }}
+                    >
+                        {todo.title}
+                    </SheetTitle>
+                    <SheetDescription
+                        contentEditable
+                        onInput={(e) => {
+                            startTransition(() => updateTodo({ text: e.currentTarget.innerText, todo_id: todo.todo_id }))
+                        }}
+                    >
+                        {todo.text}
                     </SheetDescription>
                 </SheetHeader>
             </SheetContent>

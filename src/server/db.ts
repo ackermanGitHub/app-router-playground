@@ -37,4 +37,5 @@ export const pool = new Pool({
   database: getPostgresDatabase(),
   password: getPostgresPassword(),
   port: getPostgresPort(),
+  ssl: true,
 });

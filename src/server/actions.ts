@@ -1,6 +1,7 @@
 'use server';
-import { createClient } from '@vercel/postgres';
+import { createClient, db } from '@vercel/postgres';
 import { z } from 'zod';
+import { pool } from './db';
 import { todoInputSchema, absValue } from './common';
 import { revalidatePath } from 'next/cache';
 
@@ -44,22 +45,12 @@ export const insertToDo = async (input: z.TypeOf<typeof todoInputSchema>) => {
 export const updateTodo = async (
   input: z.TypeOf<typeof todoInputSchema> & { todo_id: number }
 ) => {
-  const client = createClient();
-  await client.connect();
-
   const noNulls = Object.entries(input).filter(([_key, value]) => {
     if (value !== null) {
       return true;
     }
     return false;
   });
-
-  //const noEmptyStrings = noNulls.filter(([_key, value]) => {
-  //  if (value !== '') {
-  //    return true;
-  //  }
-  //  return false;
-  //});
 
   const noTodoId = noNulls.filter(([key, _value]) => {
     if (key !== 'todo_id') {
@@ -75,19 +66,17 @@ export const updateTodo = async (
   try {
     console.log(`
         UPDATE todos
-        SET ${key_value_pairs}, last_modified = current_timestamp
+        SET ${key_value_pairs.toString()}, last_modified = current_timestamp
         WHERE todo_id = ${input.todo_id};
       `);
-    await client.query(`
+    pool.query(`
         UPDATE todos
-        SET ${key_value_pairs}, last_modified = current_timestamp
+        SET ${key_value_pairs.toString()}, last_modified = current_timestamp
         WHERE todo_id = ${input.todo_id};
       `);
   } catch (e) {
     throw e;
   }
-
-  revalidatePath(`/dashboard`);
 };
 
 export const deleteTodo = async (input: { todo_id: number }) => {

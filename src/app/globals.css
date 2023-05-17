@@ -95,3 +95,11 @@
     font-feature-settings: 'rlig' 1, 'calt' 1;
   }
 }
+
+[contenteditable] {
+  -webkit-user-modify: read-write;
+  overflow-wrap: break-word;
+  -webkit-line-break: after-white-space;
+  -webkit-tap-highlight-color: transparent;
+  outline-style: none;
+}

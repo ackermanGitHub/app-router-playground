@@ -1,13 +1,10 @@
 "use client"
-import { useContext } from "react";
-
 import {
     ColumnDef,
     flexRender,
     getCoreRowModel,
     useReactTable,
 } from "@tanstack/react-table"
-
 import {
     Table,
     TableBody,
@@ -16,7 +13,8 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-import { log } from "console";
+import { todoSchema } from "@/server/common"
+import { z } from "zod"
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
@@ -26,7 +24,7 @@ interface DataTableProps<TData, TValue> {
 export function DataTable<TData, TValue>({
     columns,
     data,
-}: DataTableProps<TData, TValue>) {
+}: DataTableProps<z.infer<typeof todoSchema>, TValue>) {
     const table = useReactTable({
         data,
         columns,
@@ -59,7 +57,7 @@ export function DataTable<TData, TValue>({
                         table.getRowModel().rows.map((row, index) => (
                             <TableRow
                                 onClick={() => {
-                                    console.log(row.original)
+
                                 }}
                                 key={row.id}
                                 data-state={row.getIsSelected() && "selected"}
