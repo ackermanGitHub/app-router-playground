@@ -3,6 +3,9 @@ import { DataTable } from "./data-table"
 import { todosArraySchema } from "@/server/common"
 import { QueryResult, sql } from "@vercel/postgres"
 
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+
+
 export const revalidate = 3600; // revalidate every hour
 
 const getToDos = async () => {
@@ -18,8 +21,15 @@ export default async function DemoPage() {
     const todos = await getToDos()
 
     return (
-        <div className="container mx-auto p-4">
-            <DataTable columns={columns} data={todos} />
-        </div>
+        <Tabs defaultValue="table" className="container mx-auto p-4">
+            <TabsList>
+                <TabsTrigger value="table">Table</TabsTrigger>
+                <TabsTrigger value="board">Board</TabsTrigger>
+            </TabsList>
+            <TabsContent value="table">
+                <DataTable columns={columns} data={todos} />
+            </TabsContent>
+            <TabsContent value="board">Put your board here.</TabsContent>
+        </Tabs>
     )
 }
