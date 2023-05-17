@@ -1,9 +1,10 @@
 'use server';
-import { createClient, db } from '@vercel/postgres';
+import { createClient } from '@vercel/postgres';
 import { z } from 'zod';
 import { pool } from './db';
 import { todoInputSchema, absValue } from './common';
 import { revalidatePath } from 'next/cache';
+import { logDev } from '@/utils/functions';
 
 export const insertToDo = async (input: z.TypeOf<typeof todoInputSchema>) => {
   const client = createClient();
@@ -27,7 +28,7 @@ export const insertToDo = async (input: z.TypeOf<typeof todoInputSchema>) => {
   const values = noEmptyStrings.map((entry) => entry[1]);
 
   try {
-    console.log(`
+    logDev(`
         INSERT INTO todos (${keys})
         VALUES (${values.map((value) => absValue(value))});
       `);
@@ -39,7 +40,7 @@ export const insertToDo = async (input: z.TypeOf<typeof todoInputSchema>) => {
     throw e;
   }
 
-  revalidatePath(`/dashboard`);
+  revalidatePath(`/todos`);
 };
 
 export const updateTodo = async (
@@ -64,7 +65,7 @@ export const updateTodo = async (
   });
 
   try {
-    console.log(`
+    logDev(`
         UPDATE todos
         SET ${key_value_pairs.toString()}, last_modified = current_timestamp
         WHERE todo_id = ${input.todo_id};
@@ -84,7 +85,7 @@ export const deleteTodo = async (input: { todo_id: number }) => {
   await client.connect();
 
   try {
-    console.log(`
+    logDev(`
         DELETE FROM todos
         WHERE todo_id = ${input.todo_id};
       `);
@@ -96,7 +97,7 @@ export const deleteTodo = async (input: { todo_id: number }) => {
     throw e;
   }
 
-  revalidatePath(`/dashboard`);
+  revalidatePath(`/todos`);
 };
 
 export const deleteTodos = async (input: { todo_ids: number[] }) => {
@@ -104,7 +105,7 @@ export const deleteTodos = async (input: { todo_ids: number[] }) => {
   await client.connect();
 
   try {
-    console.log(`
+    logDev(`
         DELETE FROM todos
         WHERE todo_id IN (${input.todo_ids.join(',')});
       `);
@@ -116,7 +117,7 @@ export const deleteTodos = async (input: { todo_ids: number[] }) => {
     throw e;
   }
 
-  revalidatePath(`/dashboard`);
+  revalidatePath(`/todos`);
 };
 
 /* 
