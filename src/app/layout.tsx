@@ -20,8 +20,8 @@ export default function RootLayout({
       <html style={{
         colorScheme: "dark"
       }} className='dark' lang="en">
-        <body className={`${inter.className} bg-secondary h-screen relative`}>
-          <header className='w-auto h-16'>
+        <body className={`${inter.className} bg-secondary`}>
+          <header className='w-full'>
             <Navbar />
           </header>
           <main className='w-full h-auto'>
