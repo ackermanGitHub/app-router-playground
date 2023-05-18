@@ -12,6 +12,6 @@ export default async function ProfilePage() {
                 card: "m-0 w-full max-w-none h-full rounded-none"
             },
             baseTheme: dark
-        }} path="/profile" routing="path" />
+        }} />
     )
 }
