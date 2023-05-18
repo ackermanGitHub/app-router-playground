@@ -1,17 +1,11 @@
-"use client"
 import {
     SignedIn,
     SignedOut,
-    UserButton,
-    ClerkProvider,
-    useUser,
+    UserButton
 } from "@clerk/nextjs";
 import Link from "next/link";
-import { useState } from "react";
 
 const Navbar = () => {
-    const { user } = useUser()
-    const [isDrawerOpen, setIsDrawerOpen] = useState(false)
     return (
         <nav className="bottom-0 w-screen h-20 bg-[#23232e] fixed mr-20 group border-r-2 z-10 min-[600px]:top-0 min-[600px]:w-20 min-[600px]:h-screen min-[600px]:hover:w-48 transition-all duration-300 ease-in-out">
             <ul className="flex flex-row justify-center min-[600px]:flex-col items-center h-full">
@@ -48,7 +42,7 @@ const Navbar = () => {
                     <Link href="/" className=" text-[#b6b6b6] hover:text-[#ececec] hover:bg-[#141418] flex items-center h-20 grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-opacity duration-300 ">
 
                         <svg aria-label="Home" className="min-w-[2rem] mx-[1.5rem] w-8" color="currentColor" fill="currentColor" height="24" role="img" viewBox="0 0 24 24" width="24">
-                            <path d="M22 23h-6.001a1 1 0 0 1-1-1v-5.455a2.997 2.997 0 1 0-5.993 0V22a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V11.543a1.002 1.002 0 0 1 .31-.724l10-9.543a1.001 1.001 0 0 1 1.38 0l10 9.543a1.002 1.002 0 0 1 .31.724V22a1 1 0 0 1-1 1Z"></path>
+                            <path className="text-[#ff7eee]" d="M22 23h-6.001a1 1 0 0 1-1-1v-5.455a2.997 2.997 0 1 0-5.993 0V22a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V11.543a1.002 1.002 0 0 1 .31-.724l10-9.543a1.001 1.001 0 0 1 1.38 0l10 9.543a1.002 1.002 0 0 1 .31.724V22a1 1 0 0 1-1 1Z"></path>
                         </svg>
                         <span className="hidden ml-4 min-[600px]:group-hover:block">Home</span>
                     </Link>
@@ -85,9 +79,9 @@ const Navbar = () => {
                     <Link href="#" className=" text-[#b6b6b6] hover:text-[#ececec] hover:bg-[#141418] flex items-center h-20 grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-opacity duration-300">
 
                         <svg aria-label="New post" className="min-w-[2rem] mx-[1.5rem] w-8" color="currentColor" fill="currentColor" height="24" role="img" viewBox="0 0 24 24" width="24">
-                            <path d="M2 12v3.45c0 2.849.698 4.005 1.606 4.944.94.909 2.098 1.608 4.946 1.608h6.896c2.848 0 4.006-.7 4.946-1.608C21.302 19.455 22 18.3 22 15.45V8.552c0-2.849-.698-4.006-1.606-4.945C19.454 2.7 18.296 2 15.448 2H8.552c-2.848 0-4.006.699-4.946 1.607C2.698 4.547 2 5.703 2 8.552Z" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
-                            <line fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" x1="6.545" x2="17.455" y1="12.001" y2="12.001"></line>
-                            <line fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" x1="12.003" x2="12.003" y1="6.545" y2="17.455"></line>
+                            <path className="text-[#ff7eee]" d="M2 12v3.45c0 2.849.698 4.005 1.606 4.944.94.909 2.098 1.608 4.946 1.608h6.896c2.848 0 4.006-.7 4.946-1.608C21.302 19.455 22 18.3 22 15.45V8.552c0-2.849-.698-4.006-1.606-4.945C19.454 2.7 18.296 2 15.448 2H8.552c-2.848 0-4.006.699-4.946 1.607C2.698 4.547 2 5.703 2 8.552Z" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
+                            <line className="text-[#ff7eee]" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" x1="6.545" x2="17.455" y1="12.001" y2="12.001"></line>
+                            <line className="text-[#ff7eee]" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" x1="12.003" x2="12.003" y1="6.545" y2="17.455"></line>
                         </svg>
                         <span className="hidden ml-4 min-[600px]:group-hover:block">Add</span>
                     </Link>
@@ -95,11 +89,19 @@ const Navbar = () => {
 
                 <li className="justify-center w-full last:mt-auto">
                     <Link href="/profile" className=" text-[#b6b6b6] hover:text-[#ececec] hover:bg-[#141418] flex items-center h-20 grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-opacity duration-300">
-                        <svg className="min-w-[2rem] mx-[1.5rem] w-8" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M18 20a6 6 0 0 0-12 0"></path>
-                            <circle cx="12" cy="10" r="4"></circle>
-                            <circle cx="12" cy="12" r="10"></circle>
-                        </svg>
+                        <SignedIn>
+                            <div className="min-w-[2rem] mx-[1.5rem] w-8">
+                                <UserButton />
+                            </div>
+                        </SignedIn>
+                        <SignedOut>
+                            <svg className="min-w-[2rem] mx-[1.5rem] w-8" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <path className="text-[#ff7eee]" d="M18 20a6 6 0 0 0-12 0"></path>
+                                <circle className="text-[#ff7eee]" cx="12" cy="10" r="4"></circle>
+                                <circle className="text-[#ff7eee]" cx="12" cy="12" r="10"></circle>
+                            </svg>
+                            <span className="hidden ml-4 min-[600px]:group-hover:block">Profile</span>
+                        </SignedOut>
                         <span className="hidden ml-4 min-[600px]:group-hover:block">Profile</span>
                     </Link>
                 </li>
