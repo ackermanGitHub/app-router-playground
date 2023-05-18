@@ -1,9 +1,17 @@
+import {
+    UserProfile,
+} from "@clerk/nextjs";
+import { dark } from '@clerk/themes';
 
 export default async function ProfilePage() {
 
     return (
-        <div>
-
-        </div>
+        <UserProfile appearance={{
+            elements: {
+                rootBox: "w-full h-full",
+                card: "m-0 w-full max-w-none h-full rounded-none"
+            },
+            baseTheme: dark
+        }} path="/profile" routing="path" />
     )
 }
