@@ -1,10 +1,8 @@
-import { MultiUploader } from "@/components/Uploader"
 
-export default function Home() {
+export default function HomePage() {
 
   return (
     <main className="flex h-auto flex-col items-center justify-center">
-      <MultiUploader />
     </main>
   )
 }

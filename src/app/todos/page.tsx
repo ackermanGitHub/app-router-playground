@@ -17,7 +17,7 @@ const getToDos = async () => {
     return todos;
 }
 
-export default async function DemoPage() {
+export default async function ToDosPage() {
     const todos = await getToDos()
 
     return (
