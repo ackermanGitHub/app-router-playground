@@ -22,7 +22,7 @@ export default function RootLayout({
       }} className='dark' lang="en">
         <body className={`${inter.className}`}>
           <Navbar />
-          <main className='min-[600px]:ml-20'>
+          <main className='max-[600px]:mb-20 min-[600px]:ml-20'>
             {children}
           </main>
         </body>
