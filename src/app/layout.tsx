@@ -18,13 +18,11 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html style={{
-        colorScheme: "dark"
+        colorScheme: "dark",
       }} className='dark' lang="en">
-        <body className={`${inter.className} bg-secondary`}>
-          <header className='w-full'>
-            <Navbar />
-          </header>
-          <main className='w-full h-auto'>
+        <body className={`${inter.className} bg-secondary relative`}>
+          <Navbar />
+          <main className='min-[600px]:ml-20 bg-secondary'>
             {children}
           </main>
         </body>
