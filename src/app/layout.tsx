@@ -20,9 +20,9 @@ export default function RootLayout({
       <html style={{
         colorScheme: "dark",
       }} className='dark' lang="en">
-        <body className={`${inter.className} bg-secondary relative`}>
+        <body className={`${inter.className}`}>
           <Navbar />
-          <main className='min-[600px]:ml-20 bg-secondary'>
+          <main className='min-[600px]:ml-20'>
             {children}
           </main>
         </body>
