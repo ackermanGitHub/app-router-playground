@@ -116,7 +116,7 @@ function TitleCell({ todo }: { todo: z.infer<typeof todoSchema> }) {
                             }
                             sheetTriggerRef.current.innerText = e.currentTarget.innerText;
 
-                            // startTransition(() => updateTodo({ title: e.currentTarget.innerText, todo_id: todo.todo_id }))
+                            startTransition(() => updateTodo({ title: e.currentTarget.innerText, todo_id: todo.todo_id }))
                         }}
                     >
                         {title}
@@ -126,7 +126,7 @@ function TitleCell({ todo }: { todo: z.infer<typeof todoSchema> }) {
                         suppressContentEditableWarning
                         onInput={(e) => {
                             textRef.current = e.currentTarget.innerText;
-                            // startTransition(() => updateTodo({ text: e.currentTarget.innerText, todo_id: todo.todo_id }))
+                            startTransition(() => updateTodo({ text: e.currentTarget.innerText, todo_id: todo.todo_id }))
                         }}
                     >
                         {text}
