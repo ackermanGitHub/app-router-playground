@@ -42,7 +42,7 @@ const Navbar = () => {
                     </Link>
                 </li>
 
-                <li className="justify-center w-full last:mt-auto">
+                <li className="flex justify-center w-full last:mt-auto">
                     <Link href="/" className=" text-[#b6b6b6] hover:text-[#ececec] hover:bg-[#141418] flex items-center h-20 grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-opacity duration-300 ">
 
                         <svg aria-label="Home" className="min-w-[2rem] mx-[1.5rem] w-8" color="currentColor" fill="currentColor" height="24" role="img" viewBox="0 0 24 24" width="24">
@@ -52,7 +52,7 @@ const Navbar = () => {
                     </Link>
                 </li>
 
-                <li className="justify-center w-full last:mt-auto">
+                <li className="flex justify-center w-full last:mt-auto">
                     <Link href="/todos" className=" text-[#b6b6b6] hover:text-[#ececec] hover:bg-[#141418] flex items-center h-20 grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-opacity duration-300">
 
                         <svg width={30} height={30} className="min-w-[2rem] mx-[1.5rem] w-8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -67,7 +67,7 @@ const Navbar = () => {
                     </Link>
                 </li>
 
-                <li className="justify-center w-full last:mt-auto">
+                <li className="flex justify-center w-full last:mt-auto">
                     <Link href="images" className=" text-[#b6b6b6] hover:text-[#ececec] hover:bg-[#141418] flex items-center h-20 grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-opacity duration-300">
 
                         <svg width={24} height={24} className="min-w-[2rem] mx-[1.5rem] w-8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -91,7 +91,7 @@ const Navbar = () => {
                     </Link>
                 </li> */}
 
-                <li className="justify-center w-full last:mt-auto">
+                <li className="flex justify-center w-full last:mt-auto">
                     <div className="text-[#b6b6b6] hover:text-[#ececec] hover:bg-[#141418] flex items-center h-20 grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-opacity duration-300 cursor-pointer">
                         <SignedIn>
                             <div className="flex items-center h-20">
