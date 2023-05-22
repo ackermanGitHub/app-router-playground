@@ -3,7 +3,7 @@ import { ColumnDef } from "@tanstack/react-table"
 import { todoSchema } from "@/server/common"
 import { z } from "zod"
 import { updateTodo } from "@/server/actions";
-import { useTransition } from "react";
+import { useRef, useState, useTransition } from "react";
 import {
     Select,
     SelectContent,
@@ -89,26 +89,47 @@ function TagCell({ todo }: { todo: z.infer<typeof todoSchema> }) {
 
 function TitleCell({ todo }: { todo: z.infer<typeof todoSchema> }) {
     const [, startTransition] = useTransition()
+
+    const sheetTriggerRef = useRef<HTMLButtonElement>(null);
+    const [title, setTitle] = useState(todo.title)
+
+    const textRef = useRef(todo.text);
+    const [text, setText] = useState(todo.text)
+
     return (
-        <Sheet >
-            <SheetTrigger>{todo.title ? todo.title : "No tittle"}</SheetTrigger>
-            <SheetContent>
+        <Sheet onOpenChange={() => {
+            if (!sheetTriggerRef.current) {
+                throw new Error("sheetTriggerRef is not defined");
+            }
+            setTitle(sheetTriggerRef.current.innerText)
+            setText(textRef.current)
+        }} >
+            <SheetTrigger ref={sheetTriggerRef}>{todo.title || "No tittle"}</SheetTrigger>
+            <SheetContent forceMount size={"lg"} >
                 <SheetHeader>
                     <SheetTitle
                         contentEditable
+                        suppressContentEditableWarning
                         onInput={(e) => {
-                            startTransition(() => updateTodo({ title: e.currentTarget.innerText, todo_id: todo.todo_id }))
+                            if (!sheetTriggerRef.current) {
+                                throw new Error("sheetTriggerRef is not defined");
+                            }
+                            sheetTriggerRef.current.innerText = e.currentTarget.innerText;
+
+                            // startTransition(() => updateTodo({ title: e.currentTarget.innerText, todo_id: todo.todo_id }))
                         }}
                     >
-                        {todo.title}
+                        {title}
                     </SheetTitle>
                     <SheetDescription
                         contentEditable
+                        suppressContentEditableWarning
                         onInput={(e) => {
-                            startTransition(() => updateTodo({ text: e.currentTarget.innerText, todo_id: todo.todo_id }))
+                            textRef.current = e.currentTarget.innerText;
+                            // startTransition(() => updateTodo({ text: e.currentTarget.innerText, todo_id: todo.todo_id }))
                         }}
                     >
-                        {todo.text}
+                        {text}
                     </SheetDescription>
                 </SheetHeader>
             </SheetContent>
