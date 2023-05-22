@@ -79,7 +79,7 @@ const Navbar = () => {
                     </Link>
                 </li>
 
-                <li className="justify-center w-full last:mt-auto">
+                {/* <li className="justify-center w-full last:mt-auto">
                     <Link href="#" className=" text-[#b6b6b6] hover:text-[#ececec] hover:bg-[#141418] flex items-center h-20 grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-opacity duration-300">
 
                         <svg aria-label="New post" className="min-w-[2rem] mx-[1.5rem] w-8" color="currentColor" fill="currentColor" height="24" role="img" viewBox="0 0 24 24" width="24">
@@ -89,7 +89,7 @@ const Navbar = () => {
                         </svg>
                         <span className="hidden ml-4 min-[600px]:group-hover:block">Add</span>
                     </Link>
-                </li>
+                </li> */}
 
                 <li className="justify-center w-full last:mt-auto">
                     <div className="text-[#b6b6b6] hover:text-[#ececec] hover:bg-[#141418] flex items-center h-20 grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-opacity duration-300 cursor-pointer">
