@@ -13,7 +13,7 @@ const getToDos = async (userId: string) => {
     const res: QueryResult = await sql`
         SELECT * FROM todos
         WHERE user_id = ${userId}
-        ORDER BY todo_id ASC
+        ORDER BY todo_id DESC
     `
     const todos = todosArraySchema.parseAsync(res.rows);
     return todos;
