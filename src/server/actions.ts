@@ -6,7 +6,11 @@ import { todoInputSchema, absValue } from './common';
 import { revalidatePath } from 'next/cache';
 import { logDev } from '@/utils/functions';
 
-export const insertToDo = async (input: z.TypeOf<typeof todoInputSchema>) => {
+const insertToDoInputSchema = todoInputSchema.extend({
+  user_id: z.string(),
+});
+
+export const insertToDo = async (input: z.TypeOf<typeof insertToDoInputSchema>) => {
   const client = createClient();
   await client.connect();
 
@@ -109,10 +113,10 @@ export const deleteTodos = async (input: { todo_ids: number[] }) => {
         DELETE FROM todos
         WHERE todo_id IN (${input.todo_ids.join(',')});
       `);
-    // await client.query(`
-    //     DELETE FROM todos
-    //     WHERE todo_id IN (${input.todo_ids.join(',')});
-    //   `);
+    await client.query(`
+        DELETE FROM todos
+        WHERE todo_id IN (${input.todo_ids.join(',')});
+      `);
   } catch (e) {
     throw e;
   }
