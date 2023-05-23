@@ -4,9 +4,6 @@ import { todosArraySchema } from "@/server/common"
 import { QueryResult, sql } from "@vercel/postgres"
 import { auth } from "@clerk/nextjs/server"
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-
-
 export const revalidate = 3600; // revalidate every hour
 
 const getToDos = async (userId: string) => {
@@ -36,16 +33,6 @@ export default async function ToDosPage() {
         </div>
     )
 
-    return (
-        <Tabs defaultValue="table" className="container mx-auto p-4">
-            <TabsList>
-                <TabsTrigger value="table">Table</TabsTrigger>
-                <TabsTrigger value="board">Board</TabsTrigger>
-            </TabsList>
-            <TabsContent value="table">
-                <DataTable columns={columns} data={todos} />
-            </TabsContent>
-            <TabsContent value="board">Put your board here.</TabsContent>
-        </Tabs>
-    )
+    return <DataTable columns={columns} data={todos} />
+
 }
