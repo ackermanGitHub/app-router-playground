@@ -27,12 +27,6 @@ export default async function ToDosPage() {
 
     const todos = await getToDos(userId)
 
-    if (todos.length === 0) return (
-        <div className="container mx-auto p-4">
-            <p>You don&apos;t have any todos yet. Add one below.</p>
-        </div>
-    )
-
     return <DataTable columns={columns} data={todos} />
 
 }
