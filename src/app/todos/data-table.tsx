@@ -30,8 +30,12 @@ export function DataTable<TData, TValue>({
     })
     const { user, isSignedIn, isLoaded } = useUser()
 
-    if (!isSignedIn || !isLoaded || !user) {
-        return <>User is not signed in</>
+    if (!isLoaded) {
+        return <p>Loading...</p>
+    }
+
+    if (!isSignedIn) {
+        throw new Error("User is not signed in");
     }
 
 
