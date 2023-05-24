@@ -3,7 +3,6 @@ import { createClient } from '@vercel/postgres';
 import { z } from 'zod';
 import { pool } from './db';
 import { todoInputSchema, absValue } from './common';
-import { revalidatePath } from 'next/cache';
 import { logDev } from '@/utils/functions';
 
 const insertToDoInputSchema = todoInputSchema.extend({
@@ -43,8 +42,6 @@ export const insertToDo = async (input: z.TypeOf<typeof insertToDoInputSchema>) 
   } catch (e) {
     throw e;
   }
-
-  revalidatePath(`/todos`);
 };
 
 export const updateTodo = async (
@@ -100,8 +97,6 @@ export const deleteTodo = async (input: { todo_id: number }) => {
   } catch (e) {
     throw e;
   }
-
-  revalidatePath(`/todos`);
 };
 
 export const deleteTodos = async (input: { todo_ids: number[] }) => {
@@ -120,8 +115,6 @@ export const deleteTodos = async (input: { todo_ids: number[] }) => {
   } catch (e) {
     throw e;
   }
-
-  revalidatePath(`/todos`);
 };
 
 /* 
