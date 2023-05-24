@@ -137,7 +137,7 @@ function TitleCell({ todo }: { todo: z.infer<typeof todoSchema> }) {
                                 throw new Error("sheetTriggerRef is not defined");
                             }
                             sheetTriggerRef.current.innerText = e.currentTarget.innerText;
-
+                            todo.title = e.currentTarget.innerText;
                             startTransition(() => updateTodo({ title: e.currentTarget.innerText, todo_id: todo.todo_id }))
                         }}
                     >
@@ -148,6 +148,7 @@ function TitleCell({ todo }: { todo: z.infer<typeof todoSchema> }) {
                         suppressContentEditableWarning
                         onInput={(e) => {
                             textRef.current = e.currentTarget.innerText;
+                            todo.text = e.currentTarget.innerText;
                             startTransition(() => updateTodo({ text: e.currentTarget.innerText, todo_id: todo.todo_id }))
                         }}
                     >

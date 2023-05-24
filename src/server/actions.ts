@@ -1,5 +1,5 @@
 'use server';
-import { createClient } from '@vercel/postgres';
+import { createClient, QueryArrayResult, QueryResult } from '@vercel/postgres';
 import { z } from 'zod';
 import { pool } from './db';
 import { todoInputSchema, absValue } from './common';
@@ -34,14 +34,44 @@ export const insertToDo = async (input: z.TypeOf<typeof insertToDoInputSchema>) 
     logDev(`
         INSERT INTO todos (${keys})
         VALUES (${values.map((value) => absValue(value))});
+        
+        SELECT MAX(todo_id) FROM todos
+        WHERE user_id = ${absValue(input.user_id)};
       `);
-    await client.query(`
-        INSERT INTO todos (${keys})
-        VALUES (${values.map((value) => absValue(value))});
-       `);
+    const res = await client.query<{ todo_id: number }>(`
+          INSERT INTO todos (${keys})
+          VALUES (${values.map((value) => absValue(value))})
+          RETURNING todo_id;
+        `);
+    return res.rows[0].todo_id;
+    /* 
+    Ir {
+      command: 'SELECT',
+      rowCount: 1,
+      oid: null,
+      rows: [
+        todo_id: 27,
+        user_id: 'user_2PcgBLcxhNvpYJV0ibEZZONBZqf',
+        date_created: new Date('2023-05-24T07:37:24.000Z'),
+        title: null,
+        text: null,
+        category: null,
+        priority: null,
+        completed: false,
+        due_date: null,
+        assigned_to: null,
+        notes: null,
+        attachments: null,
+        tags: [ 'To Do' ],
+        last_modified: null
+      ]
+      ...
+    }
+    */
   } catch (e) {
     throw e;
   }
+
 };
 
 export const updateTodo = async (
