@@ -72,9 +72,19 @@ export function DataTable<TData, TValue>({
                 </div>
             </div>
             <TabsContent value="table">
-                <TableView columns={columns} data={data} table={table} />
+                {
+                    data.length
+                        ? <TableView columns={columns} data={data} table={table} />
+                        : <>You don&apos;t have any todos yet. Add one below</>
+                }
             </TabsContent>
-            <TabsContent value="board">Put your board here.</TabsContent>
+            <TabsContent value="board">
+                {
+                    data.length
+                        ? <>Put your board here.</>
+                        : <>You don&apos;t have any todos yet. Add one below</>
+                }
+            </TabsContent>
         </Tabs>
     )
 }
