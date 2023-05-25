@@ -75,7 +75,7 @@ export const insertToDo = async (input: z.TypeOf<typeof insertToDoInputSchema>) 
 };
 
 export const updateTodo = async (
-  input: z.TypeOf<typeof todoInputSchema> & { todo_id: number }
+  input: Omit<z.TypeOf<typeof todoInputSchema>, 'user_id'> & { todo_id: number }
 ) => {
   const noNulls = Object.entries(input).filter(([_key, value]) => {
     if (value !== null) {
