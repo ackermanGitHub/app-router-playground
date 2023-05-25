@@ -35,7 +35,6 @@ export function MultiUploader() {
                 </div>
                 <Button
                     className="🅱️"
-                    variant="outline"
                     onClick={() => {
                         uploader(selectedFiles, "imageUploader")
                     }}
