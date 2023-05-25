@@ -1,8 +1,8 @@
 'use server';
-import { createClient, QueryArrayResult, QueryResult } from '@vercel/postgres';
+import { createClient } from '@vercel/postgres';
 import { z } from 'zod';
 import { pool } from './db';
-import { todoInputSchema, absValue } from './common';
+import { todoInputSchema, imageInputSchema, absValue } from './common';
 import { logDev } from '@/utils/functions';
 
 const insertToDoInputSchema = todoInputSchema.extend({
@@ -146,6 +146,57 @@ export const deleteTodos = async (input: { todo_ids: number[] }) => {
     throw e;
   }
 };
+
+export const insertImage = async (input: z.TypeOf<typeof imageInputSchema>) => {
+  const client = createClient();
+  await client.connect();
+
+  const entries = Object.entries(input)
+
+  const keys = entries.map((entry) => entry[0]);
+  const values = entries.map((entry) => entry[1]);
+
+  try {
+    logDev(`
+        INSERT INTO images (${keys})
+        VALUES (${values.map((value) => absValue(value))})
+      `);
+    const res = await client.query(`
+          INSERT INTO images (${keys})
+          VALUES (${values.map((value) => absValue(value))})
+        `);
+  } catch (e) {
+    throw e;
+  }
+}
+
+export const injectData = async () => {
+  const client = createClient();
+  await client.connect();
+
+  try {
+    logDev(`
+        ALTER TABLE images ALTER COLUMN user_id TYPE TEXT;
+      `);
+    const res = await client.query(`
+          ALTER TABLE images ALTER COLUMN user_id TYPE TEXT;
+        `);
+  } catch (e) {
+    throw e;
+  }
+}
+
+/* 
+
+CREATE TABLE images (
+  id SERIAL PRIMARY KEY,
+  user_id INTEGER NOT NULL,
+  created_at TIMESTAMP DEFAULT NOW(),
+  url VARCHAR(100) NOT NULL UNIQUE,
+  size_mb INTEGER NOT NULL
+);
+
+*/
 
 /* 
 Bito: Sure, here are some example SQL queries to help you create the tables and populate them with data: 

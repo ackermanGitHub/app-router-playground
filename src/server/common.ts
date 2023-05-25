@@ -1,7 +1,13 @@
 import { z } from 'zod';
 
+export const imageInputSchema = z.object({
+  user_id: z.string(),
+  url: z.string(),
+  size_mb: z.number().int(),
+});
+
 export const todoInputSchema = z.object({
-  user_id: z.string().optional().nullable(),
+  user_id: z.string(),
   title: z.string().max(32).optional().nullable(),
   text: z.string().optional().nullable(),
   category: z.string().optional().nullable(),
@@ -27,6 +33,14 @@ export const todoSchema = z.object({
   notes: z.object({}).optional().nullable(),
   attachments: z.object({}).optional().nullable(),
   tags: z.array(z.string()).optional().nullable(),
+});
+
+export const imageSchema = z.object({
+  id: z.number().int().positive(),
+  user_id: z.string().optional().nullable(),
+  date_created: z.date(),
+  url: z.string().optional().nullable(),
+  size_mb: z.number().int().optional().nullable(),
 });
 
 export const todosArraySchema = z.array(todoSchema);
