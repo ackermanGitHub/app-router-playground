@@ -1,9 +1,11 @@
 "use client"
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useRef, useState, useTransition } from "react";
 
 import { ourFileRouter } from "@/app/api/uploadthing/core";
+import { insertImage } from "@/server/actions";
 import { genUploader } from "uploadthing/client";
+import { useUser } from "@clerk/nextjs";
 
 import Divider from "./Divider";
 import { Button } from "./ui/button";
@@ -23,7 +25,19 @@ export function MultiUploader() {
         }
     };
 
+    const [_, startTransition] = useTransition();
+
     const uploader = genUploader<typeof ourFileRouter>();
+
+    const { user, isSignedIn, isLoaded } = useUser()
+
+    if (!isLoaded) {
+        return <p>Loading...</p>
+    }
+
+    if (!isSignedIn) {
+        throw new Error("User is not signed in");
+    }
 
     return (
         <div className="w-full flex flex-col items-center justify-center">
@@ -36,7 +50,17 @@ export function MultiUploader() {
                 <Button
                     className="🅱️"
                     onClick={() => {
-                        uploader(selectedFiles, "imageUploader")
+                        startTransition(async () => {
+                            const promises = selectedFiles.map(async (image) => {
+                                const res = await uploader([image], "imageUploader");
+                                return insertImage({
+                                    user_id: user.id,
+                                    url: res[0].fileUrl,
+                                    size_mb: image.size / (1024 * 1024),
+                                });
+                            });
+                            await Promise.all(promises);
+                        });
                     }}
                 >
                     Upload
