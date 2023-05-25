@@ -1,24 +1,21 @@
 "use client"
-// import Image from "next/image";
-
+import Image from "next/image";
 import Divider from "./Divider";
-import { Button } from "./ui/button";
+import { imageSchema } from "@/server/common";
+import { z } from "zod";
 
-export function MultiUploader() {
+export function Gallery({ images }: { images: z.TypeOf<typeof imageSchema>[] }) {
 
     return (
         <div className="w-full flex flex-col items-center justify-center">
             <div className="my-4"></div>
-            <Button onClick={() => {
-            }}>Print Todos</Button>
-            <svg onClick={() => {
-            }} className="🅱️" aria-label="New post" color="currentColor" fill="currentColor" height="24" role="img" viewBox="0 0 24 24" width="24">
+            <svg className="🅱️" aria-label="New post" color="currentColor" fill="currentColor" height="24" role="img" viewBox="0 0 24 24" width="24">
                 <path className="text-[#b3b3b3]" d="M2 12v3.45c0 2.849.698 4.005 1.606 4.944.94.909 2.098 1.608 4.946 1.608h6.896c2.848 0 4.006-.7 4.946-1.608C21.302 19.455 22 18.3 22 15.45V8.552c0-2.849-.698-4.006-1.606-4.945C19.454 2.7 18.296 2 15.448 2H8.552c-2.848 0-4.006.699-4.946 1.607C2.698 4.547 2 5.703 2 8.552Z" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
                 <line className="text-[#b3b3b3]" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" x1="6.545" x2="17.455" y1="12.001" y2="12.001"></line>
                 <line className="text-[#b3b3b3]" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" x1="12.003" x2="12.003" y1="6.545" y2="17.455"></line>
             </svg>
-            <svg onClick={() => {
-            }} className="🅱️"
+            <svg
+                className="🅱️"
                 height="28"
                 viewBox="0 0 24 24"
                 fill="none"
@@ -34,6 +31,18 @@ export function MultiUploader() {
                 />
             </svg>
             <Divider />
+            <div className="flex w-full justify-center flex-wrap gap-2">
+                {images.map(item => (
+                    <Image
+                        key={item.id}
+                        width={200}
+                        height={200}
+                        src={item.url}
+                        alt="Preview Image"
+                    />
+                )
+                )}
+            </div>
             <div className="my-4"></div>
         </div>
     );

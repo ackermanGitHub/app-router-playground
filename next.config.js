@@ -4,6 +4,16 @@ const nextConfig = {
     serverActions: true,
   },
   reactStrictMode: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'uploadthing.com',
+        port: '',
+        pathname: '/f/**',
+      },
+    ],
+  },
 };
 
 module.exports = nextConfig;
