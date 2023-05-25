@@ -37,10 +37,10 @@ export const todoSchema = z.object({
 
 export const imageSchema = z.object({
   id: z.number().int().positive(),
-  user_id: z.string().optional().nullable(),
+  user_id: z.string(),
   date_created: z.date(),
-  url: z.string().optional().nullable(),
-  size_mb: z.number().int().optional().nullable(),
+  url: z.string(),
+  size_mb: z.number().int(),
 });
 
 export const todosArraySchema = z.array(todoSchema);
