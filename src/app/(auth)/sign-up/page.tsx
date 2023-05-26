@@ -1,4 +1,5 @@
 import { SignUp } from "@clerk/nextjs/app-beta";
+import { Suspense } from "react";
 
 interface PageProps {
     searchParams: {
@@ -13,7 +14,7 @@ export default function Page({ searchParams }: PageProps) {
         redirectUrl = redirectUrlFromParams;
     }
 
-    return <SignUp signInUrl="/sign-in" redirectUrl={redirectUrl} />;
+    return <Suspense fallback={<h2>suspense</h2>}><SignUp signInUrl="/sign-in" redirectUrl={redirectUrl} /></Suspense>;
 }
 
 export const revalidate = 0;
