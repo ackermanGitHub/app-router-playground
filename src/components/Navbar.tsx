@@ -7,9 +7,6 @@ import { dark } from '@clerk/themes';
 import Link from "next/link";
 
 const Navbar = () => {
-
-
-
     return (
         <nav className="bottom-0 w-screen h-20 bg-[#23232e] fixed mr-20 group border-r-2 z-10 min-[600px]:top-0 min-[600px]:w-20 min-[600px]:h-screen min-[600px]:hover:w-48 transition-all duration-300 ease-in-out">
             <ul className="flex flex-row justify-center min-[600px]:flex-col items-center h-full">
@@ -98,7 +95,7 @@ const Navbar = () => {
                                 <div className="min-w-[2rem] mx-[1.5rem] w-8">
                                     <UserButton appearance={{
                                         baseTheme: dark,
-                                    }} />
+                                    }} afterSignOutUrl="/" />
                                 </div>
                                 <span className="hidden ml-4 min-[600px]:group-hover:block">Profile</span>
                             </div>
