@@ -9,7 +9,7 @@ import { z } from "zod"
 import { useUser } from "@clerk/nextjs";
 import { TableView } from "@/components/TableView"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { useState, useTransition } from "react";
+import { useRef, useState, useTransition } from "react";
 import { deleteTodos, insertToDo } from "@/server/actions";
 import { Button } from "@/components/ui/button";
 
@@ -24,6 +24,7 @@ export function DataTable<TData, TValue>({
 }: DataTableProps<z.infer<typeof todoSchema>, TValue>) {
     const [, startTransition] = useTransition()
     const [todos, setTodos] = useState<z.infer<typeof todoSchema>[]>(data)
+    const toDeleteToDos = useRef<number[]>([])
 
     const table = useReactTable({
         data: todos,
@@ -54,35 +55,44 @@ export function DataTable<TData, TValue>({
                     }}>Print Todos</Button>
                     <svg onClick={() => {
                         const newId = -Math.floor(Math.random() * 1000000)
-                        let newData = [
-                            {
-                                todo_id: newId,
-                                user_id: user.id,
-                                date_created: new Date(),
-                                title: null,
-                                text: null,
-                                category: null,
-                                priority: null,
-                                completed: false,
-                                due_date: null,
-                                assigned_to: null,
-                                notes: null,
-                                attachments: null,
-                                tags: ['To Do'],
-                                last_modified: null
-                            },
-                            ...todos,
-                        ];
-                        setTodos(newData)
+                        setTodos((prev) => {
+                            return [
+                                {
+                                    todo_id: newId,
+                                    user_id: user.id,
+                                    date_created: new Date(),
+                                    title: null,
+                                    text: null,
+                                    category: null,
+                                    priority: null,
+                                    completed: false,
+                                    due_date: null,
+                                    assigned_to: null,
+                                    notes: null,
+                                    attachments: null,
+                                    tags: ['To Do'],
+                                    last_modified: null
+                                },
+                                ...prev,
+                            ]
+                        })
                         startTransition(async () => {
-                            const res = await insertToDo({ user_id: user.id, tags: ["To Do"] })
-                            newData = newData.map(todo => {
-                                if (todo.todo_id === newId) {
-                                    todo.todo_id = res
-                                }
-                                return todo
+                            const resId = await insertToDo({ user_id: user.id, tags: ["To Do"] })
+
+                            setTodos((prev) => {
+                                // update the inserted todo with the response id:
+
+                                return prev.map((todo) => {
+                                    if (todo.todo_id === newId) {
+                                        return {
+                                            ...todo,
+                                            todo_id: resId
+                                        }
+                                    }
+                                    return todo
+                                })
+
                             })
-                            setTodos(newData)
                         })
                         table.setRowSelection((prevSelection) => {
                             const newSelection: {
@@ -95,6 +105,7 @@ export function DataTable<TData, TValue>({
                             }
                             return newSelection
                         })
+                        table.reset()
 
                     }} className="🅱️" aria-label="New post" color="currentColor" fill="currentColor" height="24" role="img" viewBox="0 0 24 24" width="24">
                         <path className="text-[#b3b3b3]" d="M2 12v3.45c0 2.849.698 4.005 1.606 4.944.94.909 2.098 1.608 4.946 1.608h6.896c2.848 0 4.006-.7 4.946-1.608C21.302 19.455 22 18.3 22 15.45V8.552c0-2.849-.698-4.006-1.606-4.945C19.454 2.7 18.296 2 15.448 2H8.552c-2.848 0-4.006.699-4.946 1.607C2.698 4.547 2 5.703 2 8.552Z" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
@@ -102,9 +113,19 @@ export function DataTable<TData, TValue>({
                         <line className="text-[#b3b3b3]" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" x1="12.003" x2="12.003" y1="6.545" y2="17.455"></line>
                     </svg>
                     <svg onClick={() => {
-                        startTransition(() => deleteTodos({ todo_ids: table.getSelectedRowModel().rows.map(row => row.original.todo_id) }))
-                        const newData = todos.filter(todo => !table.getSelectedRowModel().rows.map(row => row.original.todo_id).includes(todo.todo_id))
-                        setTodos(newData)
+                        const getToDosIds = () => table.getSelectedRowModel().rows.map(row => row.original.todo_id)
+                        startTransition(() => deleteTodos({ todo_ids: getToDosIds() }))
+                        if (getToDosIds().find(id => id < 0)) {
+                            return setTimeout(() => {
+                                console.log(getToDosIds())
+                            }, 8000)
+                        }
+                        setTodos((prev) => {
+                            // update the inserted todo with the response id:
+
+                            return prev.filter(todo => !getToDosIds().includes(todo.todo_id))
+
+                        })
                         table.resetRowSelection()
                     }} className="🅱️"
                         height="28"
