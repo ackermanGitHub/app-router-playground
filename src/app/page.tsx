@@ -1,4 +1,4 @@
-import { VercelPGIco, NextjsIco, NextjsRoundedIco, ClerkIco, UploadThingIco } from "@/utils/SVGs"
+import { VercelPGIco, NextjsIco, NextjsRoundedIco, ClerkIco, UploadThingIco, TypeScriptIco, ZodIco } from "@/utils/SVGs"
 
 export default function HomePage() {
 
@@ -9,6 +9,8 @@ export default function HomePage() {
       <NextjsRoundedIco />
       <ClerkIco />
       <UploadThingIco />
+      <TypeScriptIco />
+      <ZodIco />
     </div>
   )
 }
