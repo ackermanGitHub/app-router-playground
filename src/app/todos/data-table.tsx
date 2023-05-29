@@ -41,6 +41,82 @@ export function DataTable<TData, TValue>({
         throw new Error("User is not signed in");
     }
 
+    const handleAddToDo = () => {
+        const newId = -Math.floor(Math.random() * 1000000)
+        setTodos((prev) => {
+            return [
+                {
+                    todo_id: newId,
+                    user_id: user.id,
+                    date_created: new Date(),
+                    title: null,
+                    text: null,
+                    category: null,
+                    priority: null,
+                    completed: false,
+                    due_date: null,
+                    assigned_to: null,
+                    notes: null,
+                    attachments: null,
+                    tags: ['To Do'],
+                    last_modified: null
+                },
+                ...prev,
+            ]
+        })
+        startTransition(async () => {
+            const resId = await insertToDo({ user_id: user.id, tags: ["To Do"] })
+
+            setTodos((prev) => {
+                // update the inserted todo with the response id:
+
+                return prev.map((todo) => {
+                    if (todo.todo_id === newId) {
+                        return {
+                            ...todo,
+                            todo_id: resId
+                        }
+                    }
+                    return todo
+                })
+
+            })
+        })
+        table.setRowSelection((prevSelection) => {
+            console.log("prevSelection", prevSelection)
+            const newSelection: {
+                [key: number]: boolean
+            } = {};
+
+            for (const [key, value] of Object.entries(prevSelection)) {
+                const newKey = parseInt(key) + 1;
+                newSelection[newKey] = value;
+            }
+
+            console.log("newSelection", newSelection)
+            return newSelection
+        })
+        table.reset()
+
+    }
+
+    const handleDelete = () => {
+        const getToDosIds = () => table.getSelectedRowModel().rows.map(row => row.original.todo_id)
+        startTransition(() => deleteTodos({ todo_ids: getToDosIds() }))
+        if (getToDosIds().find(id => id < 0)) {
+            return setTimeout(() => {
+                console.log(getToDosIds())
+            }, 8000)
+        }
+        setTodos((prev) => {
+            // update the inserted todo with the response id:
+
+            return prev.filter(todo => !getToDosIds().includes(todo.todo_id))
+
+        })
+        table.resetRowSelection()
+    }
+
 
     return (
         <Tabs defaultValue="table" className="container mx-auto p-4">
@@ -53,81 +129,12 @@ export function DataTable<TData, TValue>({
                     <Button onClick={() => {
                         console.log(todos)
                     }}>Print Todos</Button>
-                    <svg onClick={() => {
-                        const newId = -Math.floor(Math.random() * 1000000)
-                        setTodos((prev) => {
-                            return [
-                                {
-                                    todo_id: newId,
-                                    user_id: user.id,
-                                    date_created: new Date(),
-                                    title: null,
-                                    text: null,
-                                    category: null,
-                                    priority: null,
-                                    completed: false,
-                                    due_date: null,
-                                    assigned_to: null,
-                                    notes: null,
-                                    attachments: null,
-                                    tags: ['To Do'],
-                                    last_modified: null
-                                },
-                                ...prev,
-                            ]
-                        })
-                        startTransition(async () => {
-                            const resId = await insertToDo({ user_id: user.id, tags: ["To Do"] })
-
-                            setTodos((prev) => {
-                                // update the inserted todo with the response id:
-
-                                return prev.map((todo) => {
-                                    if (todo.todo_id === newId) {
-                                        return {
-                                            ...todo,
-                                            todo_id: resId
-                                        }
-                                    }
-                                    return todo
-                                })
-
-                            })
-                        })
-                        table.setRowSelection((prevSelection) => {
-                            const newSelection: {
-                                [key: number]: boolean
-                            } = {};
-
-                            for (const [key, value] of Object.entries(prevSelection)) {
-                                const newKey = parseInt(key) + 1;
-                                newSelection[newKey] = value;
-                            }
-                            return newSelection
-                        })
-                        table.reset()
-
-                    }} className="🅱️" aria-label="New post" color="currentColor" fill="currentColor" height="24" role="img" viewBox="0 0 24 24" width="24">
+                    <svg onClick={handleAddToDo} className="🅱️" aria-label="New post" color="currentColor" fill="currentColor" height="24" role="img" viewBox="0 0 24 24" width="24">
                         <path className="text-[#b3b3b3]" d="M2 12v3.45c0 2.849.698 4.005 1.606 4.944.94.909 2.098 1.608 4.946 1.608h6.896c2.848 0 4.006-.7 4.946-1.608C21.302 19.455 22 18.3 22 15.45V8.552c0-2.849-.698-4.006-1.606-4.945C19.454 2.7 18.296 2 15.448 2H8.552c-2.848 0-4.006.699-4.946 1.607C2.698 4.547 2 5.703 2 8.552Z" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
                         <line className="text-[#b3b3b3]" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" x1="6.545" x2="17.455" y1="12.001" y2="12.001"></line>
                         <line className="text-[#b3b3b3]" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" x1="12.003" x2="12.003" y1="6.545" y2="17.455"></line>
                     </svg>
-                    <svg onClick={() => {
-                        const getToDosIds = () => table.getSelectedRowModel().rows.map(row => row.original.todo_id)
-                        startTransition(() => deleteTodos({ todo_ids: getToDosIds() }))
-                        if (getToDosIds().find(id => id < 0)) {
-                            return setTimeout(() => {
-                                console.log(getToDosIds())
-                            }, 8000)
-                        }
-                        setTodos((prev) => {
-                            // update the inserted todo with the response id:
-
-                            return prev.filter(todo => !getToDosIds().includes(todo.todo_id))
-
-                        })
-                        table.resetRowSelection()
-                    }} className="🅱️"
+                    <svg onClick={handleDelete} className="🅱️"
                         height="28"
                         viewBox="0 0 24 24"
                         fill="none"
