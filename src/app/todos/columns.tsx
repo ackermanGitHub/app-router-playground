@@ -110,7 +110,7 @@ function TagCell({ todo }: { todo: z.infer<typeof todoSchema> }) {
 }
 
 function TitleCell({ todo }: { todo: z.infer<typeof todoSchema> }) {
-    const [, startTransition] = useTransition()
+    const [isPending, startTransition] = useTransition()
 
     const sheetTriggerRef = useRef<HTMLButtonElement>(null);
     const [title, setTitle] = useState(todo.title)
@@ -126,10 +126,15 @@ function TitleCell({ todo }: { todo: z.infer<typeof todoSchema> }) {
             setTitle(sheetTriggerRef.current.innerText)
             setText(textRef.current)
         }} >
-            <SheetTrigger ref={sheetTriggerRef}>{todo.title || "No tittle"}</SheetTrigger>
-            <SheetContent forceMount size={"lg"} >
+            <SheetTrigger className="text-left" ref={sheetTriggerRef}>{todo.title || "No tittle"}</SheetTrigger>
+            <SheetContent className="text-left" forceMount size={"lg"} >
+                {
+                    isPending &&
+                    <div className="absolute top-4 left-4 animate-spin rounded-full h-4 w-4 border-b-2 border-red-500 ml-4" />
+                }
                 <SheetHeader>
                     <SheetTitle
+                        className="flex items-center mt-10"
                         contentEditable
                         suppressContentEditableWarning
                         onInput={(e) => {
