@@ -96,7 +96,6 @@ export function DataTable<TData, TValue>({
             console.log("newSelection", newSelection)
             return newSelection
         })
-        table.reset()
 
     }
 

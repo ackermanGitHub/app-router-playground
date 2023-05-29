@@ -134,7 +134,7 @@ function TitleCell({ todo }: { todo: z.infer<typeof todoSchema> }) {
                 }
                 <SheetHeader>
                     <SheetTitle
-                        className="flex items-center mt-10"
+                        className="flex items-center mt-10 text-left"
                         contentEditable
                         suppressContentEditableWarning
                         onInput={(e) => {
@@ -149,6 +149,7 @@ function TitleCell({ todo }: { todo: z.infer<typeof todoSchema> }) {
                         {title}
                     </SheetTitle>
                     <SheetDescription
+                        className="text-left"
                         contentEditable
                         suppressContentEditableWarning
                         onInput={(e) => {
