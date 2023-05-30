@@ -89,6 +89,7 @@ function TagCell({ todo }: { todo: z.infer<typeof todoSchema> }) {
         <Select
             onValueChange={(value) => {
                 startTransition(() => updateTodo({ tags: [value], todo_id: todo.todo_id }))
+                todo.tags = [value];
             }}
             defaultValue={tag}
         >
