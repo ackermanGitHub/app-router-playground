@@ -1,4 +1,4 @@
-import { VercelPGIco, NextjsIco, NextjsRoundedIco, ClerkIco, UploadThingIco, TypeScriptIco, ZodIco, TailwindIco, PostgresIco, EsLintIco, RadixUiIco, TanStackIco, AutoprefixerIco, PostCssIco } from "@/utils/SVGs"
+import { VercelPGIco, NextjsIco, NextjsRoundedIco, ClerkIco, UploadThingIco, TypeScriptIco, ZodIco, TailwindIco, PostgresIco, EsLintIco, RadixUiIco, TanStackIco, AutoprefixerIco, PostCssIco, PrettierIco } from "@/utils/SVGs"
 
 export default function HomePage() {
 
@@ -18,6 +18,7 @@ export default function HomePage() {
       <TanStackIco />
       <AutoprefixerIco />
       <PostCssIco />
+      <PrettierIco />
     </div>
   )
 }
