@@ -3,7 +3,6 @@ import {
     SignedOut,
     UserButton
 } from "@clerk/nextjs";
-import { dark } from '@clerk/themes';
 import Link from "next/link";
 
 const Navbar = () => {
@@ -93,9 +92,7 @@ const Navbar = () => {
                         <SignedIn>
                             <div className="flex items-center h-20">
                                 <div className="min-w-[2rem] mx-[1.5rem] w-8">
-                                    <UserButton appearance={{
-                                        baseTheme: dark,
-                                    }} afterSignOutUrl="/" />
+                                    <UserButton afterSignOutUrl="/" />
                                 </div>
                                 <span className="hidden ml-4 min-[600px]:group-hover:block">Profile</span>
                             </div>
