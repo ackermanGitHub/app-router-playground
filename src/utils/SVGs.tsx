@@ -279,7 +279,7 @@ export const TanStackHeader = ({ className, ref, ...props }: { className?: strin
     return <h1
         ref={ref}
         className={cn(
-            "font-black text-5xl text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-violet-500 decoration-gray-200 dark:decoration-gray-800 mb-2",
+            "font-black text-5xl text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-violet-500 decoration-gray-200 dark:decoration-gray-800",
             className
         )}
         {...props}

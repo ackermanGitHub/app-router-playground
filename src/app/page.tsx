@@ -16,32 +16,56 @@ export default function HomePage() {
   return (
     <div className="flex h-auto flex-col items-center justify-center">
       <Divider />
-      <PostgresIcoSVG />
-      <VercelPGIcoSVG />
+      <div className="flex items-center">
+
+        <PostgresIcoSVG />
+        <VercelPGIcoSVG />
+      </div>
       <Divider />
-      <EsLintIcoSVGs />
-      <EsLintHeaderSVG />
-      <EsLintIcoSVG />
+      <div className="flex items-center">
+
+        <EsLintIcoSVGs />
+        <EsLintHeaderSVG />
+        <EsLintIcoSVG />
+      </div>
       <Divider />
-      <RadixIcoSVGs />
-      <RadixHeaderSVG />
-      <RadixIcoSVG />
+      <div className="flex items-center">
+
+        <RadixIcoSVGs />
+        <RadixHeaderSVG />
+        <RadixIcoSVG />
+      </div>
       <Divider />
-      <AutoprefixerSVG />
-      <PostCssIco />
+      <div className="flex items-center">
+
+        <AutoprefixerSVG />
+        <PostCssIco />
+      </div>
       <TailwindIcoSVG />
       <Divider />
-      <NextjsIcoSVG />
-      <NextjsRoundedIcoSVG />
+      <div className="flex items-center">
+
+        <NextjsIcoSVG />
+        <NextjsRoundedIcoSVG />
+      </div>
       <Divider />
-      <TypeScriptIcoSVG />
-      <PrettierIco />
+      <div className="flex items-center">
+
+        <TypeScriptIcoSVG />
+        <PrettierIco />
+      </div>
       <Divider />
-      <TanStackHeader className='h-[58px]' />
-      <ZodIcoSVG />
+      <div className="flex items-center">
+
+        <TanStackHeader className='h-[58px] flex items-center' />
+        <ZodIcoSVG />
+      </div>
       <Divider />
-      <ClerkIcoSVG />
-      <UploadThingHeader className='text-5xl h-[58px]' />
+      <div className="flex items-center">
+
+        <ClerkIcoSVG />
+        <UploadThingHeader className='text-5xl h-[58px] flex items-center' />
+      </div>
       <Divider />
     </div>
   )
