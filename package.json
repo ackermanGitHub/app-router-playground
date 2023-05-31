@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build --force",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
@@ -45,6 +45,6 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
-    "typescript": "^5.2.0-beta"
+    "typescript": "^5.0.2"
   }
 }
