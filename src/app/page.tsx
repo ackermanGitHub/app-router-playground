@@ -1,5 +1,5 @@
 import Divider from "@/components/Divider"
-import Hero from "@/components/Hero"
+import ToggleTheme from "@/components/ToggleTheme"
 import {
   PostgresIcoSVG, VercelPGIcoSVG,
   EsLintIcoSVGs, EsLintHeaderSVG, EsLintIcoSVG,
@@ -15,6 +15,8 @@ export default function HomePage() {
 
   return (
     <div className="flex h-auto flex-col items-center justify-center">
+      <Divider />
+      <ToggleTheme />
       <Divider />
       <div className="flex items-center gap-2 flex-wrap justify-center">
 
