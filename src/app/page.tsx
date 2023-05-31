@@ -40,8 +40,8 @@ export default function HomePage() {
 
         <AutoprefixerSVG />
         <PostCssIco />
+        <TailwindIcoSVG width="200" />
       </div>
-      <TailwindIcoSVG />
       <Divider />
       <div className="flex items-center gap-2 flex-wrap justify-center">
 
