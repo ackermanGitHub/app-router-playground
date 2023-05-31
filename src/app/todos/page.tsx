@@ -7,8 +7,6 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import Divider from "@/components/Divider"
 
-export const revalidate = 3600; // revalidate every hour
-
 const getToDos = async (userId: string) => {
     const res: QueryResult = await sql`
         SELECT * FROM todos
