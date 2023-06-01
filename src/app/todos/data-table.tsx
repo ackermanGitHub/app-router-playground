@@ -22,7 +22,7 @@ export function DataTable<TData, TValue>({
     columns,
     data,
 }: DataTableProps<z.infer<typeof todoSchema>, TValue>) {
-    const [, startTransition] = useTransition()
+    const [isPending, startTransition] = useTransition()
     const [todos, setTodos] = useState<z.infer<typeof todoSchema>[]>(data)
 
     const table = useReactTable({
@@ -134,6 +134,10 @@ export function DataTable<TData, TValue>({
                     <TabsTrigger value="board">Board</TabsTrigger>
                 </TabsList>
                 <div className="flex items-center gap-2">
+                    {
+                        isPending &&
+                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-red-500 ml-4" />
+                    }
                     <Button onClick={() => {
                         console.log("toDos", { todos, tableToDos: table.getRowModel() })
                     }}>Print Todos</Button>
