@@ -23,7 +23,7 @@ export default function RootLayout({
       <html style={{
         colorScheme: "dark",
       }} className='dark' lang="en">
-        <body className={`${inter.className} bg-gradient-to-r from-slate-900 to-indigo-950`}>
+        <body className={`${inter.className} bg-gradient-to-r from-slate-200 to-indigo-200 dark:from-slate-900 dark:to-indigo-950`}>
           <Navbar />
           <main className='max-[600px]:mb-20 min-[600px]:ml-20'>
             {children}
