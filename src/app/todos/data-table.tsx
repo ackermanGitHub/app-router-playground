@@ -116,6 +116,7 @@ export function DataTable<TData, TValue>({
             }
             if (ids.find(id => id < 0)) {
                 if (count > 0) {
+                    table.options.enableRowSelection = false
                     setTimeout(() => {
                         console.log('Retrying deletion', getSelectedToDoIds(), count)
                         checkIdsAndMakeMutation(getSelectedToDoIds(), count - 1, delay)
@@ -128,6 +129,7 @@ export function DataTable<TData, TValue>({
                 setTodos((prev) => {
                     return prev.filter(todo => !getSelectedToDoIds().includes(todo.todo_id))
                 })
+                table.options.enableRowSelection = true
                 table.resetRowSelection()
             }
         }
@@ -148,7 +150,14 @@ export function DataTable<TData, TValue>({
                         <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-red-500 ml-4" />
                     }
                     <Button onClick={() => {
-                        console.log("toDos", { todos, tableToDos: table.getRowModel() })
+
+                        console.log("toDos", {
+                            todos, tableToDos:
+                                table.getRowModel(),
+                            selected: table.getSelectedRowModel()
+                        })
+                        table.options.enableRowSelection = !table.options.enableRowSelection
+
                     }}>Print Todos</Button>
                     <svg onClick={handleAddToDo} className="🅱️" aria-label="New post" color="currentColor" fill="currentColor" height="24" role="img" viewBox="0 0 24 24" width="24">
                         <path className="text-[#b3b3b3]" d="M2 12v3.45c0 2.849.698 4.005 1.606 4.944.94.909 2.098 1.608 4.946 1.608h6.896c2.848 0 4.006-.7 4.946-1.608C21.302 19.455 22 18.3 22 15.45V8.552c0-2.849-.698-4.006-1.606-4.945C19.454 2.7 18.296 2 15.448 2H8.552c-2.848 0-4.006.699-4.946 1.607C2.698 4.547 2 5.703 2 8.552Z" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
