@@ -7,10 +7,10 @@ import Link from "next/link";
 
 const Navbar = () => {
     return (
-        <nav className="bottom-0 w-screen h-20 bg-[#23232e] fixed mr-20 group border-r-2 z-10 min-[600px]:top-0 min-[600px]:w-20 min-[600px]:h-screen min-[600px]:hover:w-48 transition-all duration-300 ease-in-out">
+        <nav className="bottom-0 w-screen h-20 bg-[#93C6E7] dark:bg-[#393053] fixed mr-20 group border-r-2 z-10 min-[600px]:top-0 min-[600px]:w-20 min-[600px]:h-screen min-[600px]:hover:w-48 transition-all duration-300 ease-in-out">
             <ul className="flex flex-row justify-center min-[600px]:flex-col items-center h-full">
                 <li className="hidden min-[600px]:block font-bold uppercase mb-4 text-center text-base">
-                    <Link href="/" className=" w-full text-[#b6b6b6] hover:text-[#ececec] hover:bg-[#141418] flex items-center h-20 grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-opacity duration-300">
+                    <Link href="/" className=" w-full text-[#111111] hover:text-[#555555] dark:text-[#b6b6b6] dark:hover:text-[#ececec] hover:bg-[#FEDEFF] dark:hover:bg-[#18122B] flex items-center h-20 grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-opacity duration-300">
                         <span className="hidden ml-4 min-[600px]:group-hover:block logo-text">NoteTaker</span>
                         <svg
                             aria-hidden="true"
@@ -39,7 +39,7 @@ const Navbar = () => {
                 </li>
 
                 <li className="flex justify-center w-full last:mt-auto">
-                    <Link href="/" className=" w-full text-[#b6b6b6] hover:text-[#ececec] hover:bg-[#141418] flex items-center h-20 grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-opacity duration-300 ">
+                    <Link href="/" className=" w-full text-[#111111] hover:text-[#555555] dark:text-[#b6b6b6] dark:hover:text-[#ececec] hover:bg-[#FEDEFF] dark:hover:bg-[#18122B] flex items-center h-20 grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-opacity duration-300 ">
 
                         <svg aria-label="Home" className="min-w-[2rem] mx-[1.5rem] w-8" color="currentColor" fill="currentColor" height="24" role="img" viewBox="0 0 24 24" width="24">
                             <path className="text-[#ff7eee]" d="M22 23h-6.001a1 1 0 0 1-1-1v-5.455a2.997 2.997 0 1 0-5.993 0V22a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V11.543a1.002 1.002 0 0 1 .31-.724l10-9.543a1.001 1.001 0 0 1 1.38 0l10 9.543a1.002 1.002 0 0 1 .31.724V22a1 1 0 0 1-1 1Z"></path>
@@ -49,7 +49,7 @@ const Navbar = () => {
                 </li>
 
                 <li className="flex justify-center w-full last:mt-auto">
-                    <Link href="/todos" className=" w-full text-[#b6b6b6] hover:text-[#ececec] hover:bg-[#141418] flex items-center h-20 grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-opacity duration-300">
+                    <Link href="/todos" className=" w-full text-[#111111] hover:text-[#555555] dark:text-[#b6b6b6] dark:hover:text-[#ececec] hover:bg-[#FEDEFF] dark:hover:bg-[#18122B] flex items-center h-20 grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-opacity duration-300">
 
                         <svg width={30} height={30} className="min-w-[2rem] mx-[1.5rem] w-8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path className="text-[#ff7eee]" opacity="0.4" d="M11 19.5H21" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -64,7 +64,7 @@ const Navbar = () => {
                 </li>
 
                 <li className="flex justify-center w-full last:mt-auto">
-                    <Link href="images" className=" w-full text-[#b6b6b6] hover:text-[#ececec] hover:bg-[#141418] flex items-center h-20 grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-opacity duration-300">
+                    <Link href="images" className=" w-full text-[#111111] hover:text-[#555555] dark:text-[#b6b6b6] dark:hover:text-[#ececec] hover:bg-[#FEDEFF] dark:hover:bg-[#18122B] flex items-center h-20 grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-opacity duration-300">
 
                         <svg width={24} height={24} className="min-w-[2rem] mx-[1.5rem] w-8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path className="text-[#ff7eee]" d="M9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -76,7 +76,7 @@ const Navbar = () => {
                 </li>
 
                 {/* <li className="justify-center w-full last:mt-auto">
-                    <Link href="#" className=" w-full text-[#b6b6b6] hover:text-[#ececec] hover:bg-[#141418] flex items-center h-20 grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-opacity duration-300">
+                    <Link href="#" className=" w-full text-[#111111] hover:text-[#555555] dark:text-[#b6b6b6] dark:hover:text-[#ececec] hover:bg-[#FEDEFF] dark:hover:bg-[#18122B] flex items-center h-20 grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-opacity duration-300">
 
                         <svg aria-label="New post" className="min-w-[2rem] mx-[1.5rem] w-8" color="currentColor" fill="currentColor" height="24" role="img" viewBox="0 0 24 24" width="24">
                             <path className="text-[#ff7eee]" d="M2 12v3.45c0 2.849.698 4.005 1.606 4.944.94.909 2.098 1.608 4.946 1.608h6.896c2.848 0 4.006-.7 4.946-1.608C21.302 19.455 22 18.3 22 15.45V8.552c0-2.849-.698-4.006-1.606-4.945C19.454 2.7 18.296 2 15.448 2H8.552c-2.848 0-4.006.699-4.946 1.607C2.698 4.547 2 5.703 2 8.552Z" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
@@ -88,7 +88,7 @@ const Navbar = () => {
                 </li> */}
 
                 <li className="flex justify-center w-full last:mt-auto">
-                    <div className="w-full text-[#b6b6b6] hover:text-[#ececec] hover:bg-[#141418] flex items-center h-20 grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-opacity duration-300 cursor-pointer">
+                    <div className="w-full text-[#111111] hover:text-[#555555] dark:text-[#b6b6b6] dark:hover:text-[#ececec] hover:bg-[#FEDEFF] dark:hover:bg-[#18122B] flex items-center h-20 grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-opacity duration-300 cursor-pointer">
                         <SignedIn>
                             <div className="flex items-center h-20">
                                 <div className="min-w-[2rem] mx-[1.5rem] w-8">
@@ -221,7 +221,7 @@ export default Navbar;
 
 
                         <li className="justify-center w-full last:mt-auto" id="themeButton">
-                    <a href="#" className=" w-full text-[#b6b6b6] hover:text-[#ececec] hover:bg-[#141418] flex items-center h-20 grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-opacity duration-300">
+                    <a href="#" className=" w-full text-[#111111] hover:text-[#555555] dark:text-[#b6b6b6] dark:hover:text-[#ececec] hover:bg-[#FEDEFF] dark:hover:bg-[#18122B] flex items-center h-20 grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-opacity duration-300">
                         <svg
                             id="lightIcon"
                             aria-hidden="true"
