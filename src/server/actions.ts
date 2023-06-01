@@ -32,10 +32,9 @@ export const insertToDo = async (input: z.TypeOf<typeof insertToDoInputSchema>) 
 
   try {
     logDev(`
-        INSERT INTO todos (${keys})
-        VALUES (${values.map((value) => absValue(value))});
-        SELECT MAX(todo_id) FROM todos
-        WHERE user_id = ${absValue(input.user_id)};
+          INSERT INTO todos (${keys})
+          VALUES (${values.map((value) => absValue(value))})
+          RETURNING todo_id;
       `);
     const res = await client.query<{ todo_id: number }>(`
           INSERT INTO todos (${keys})
