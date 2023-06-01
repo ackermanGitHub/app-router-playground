@@ -8,6 +8,11 @@ import { Button } from "@/components/ui/button"
 import Divider from "@/components/Divider"
 
 const getToDos = async (userId: string) => {
+    console.log(`
+        SELECT * FROM todos
+        WHERE user_id = ${userId}
+        ORDER BY todo_id DESC
+    `)
     const res: QueryResult = await sql`
         SELECT * FROM todos
         WHERE user_id = ${userId}
