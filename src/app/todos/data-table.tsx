@@ -109,20 +109,29 @@ export function DataTable<TData, TValue>({
     }
 
     const handleDelete = () => {
-        const getToDosIds = () => table.getSelectedRowModel().rows.map(row => row.original.todo_id)
-        startTransition(() => deleteTodos({ todo_ids: getToDosIds() }))
-        if (getToDosIds().find(id => id < 0)) {
-            return setTimeout(() => {
-                console.log(getToDosIds())
-            }, 8000)
+        const getSelectedToDoIds = () => table.getSelectedRowModel().rows.map(row => row.original.todo_id)
+        function checkIdsAndMakeMutation(ids: number[], count = 3, delay = 2000) {
+            if (!getSelectedToDoIds().length) {
+                throw new Error("No ToDos selected");
+            }
+            if (ids.find(id => id < 0)) {
+                if (count > 0) {
+                    setTimeout(() => {
+                        console.log('Retrying deletion', getSelectedToDoIds(), count)
+                        checkIdsAndMakeMutation(getSelectedToDoIds(), count - 1, delay)
+                    }, delay)
+                } else {
+                    console.log('Maximum retries reached, mutation aborted')
+                }
+            } else {
+                startTransition(() => deleteTodos({ todo_ids: ids }))
+                setTodos((prev) => {
+                    return prev.filter(todo => !getSelectedToDoIds().includes(todo.todo_id))
+                })
+                table.resetRowSelection()
+            }
         }
-        setTodos((prev) => {
-            // update the inserted todo with the response id:
-
-            return prev.filter(todo => !getToDosIds().includes(todo.todo_id))
-
-        })
-        table.resetRowSelection()
+        checkIdsAndMakeMutation(getSelectedToDoIds(), 3, 2000)
     }
 
 
