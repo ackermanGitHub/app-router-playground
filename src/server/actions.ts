@@ -34,7 +34,6 @@ export const insertToDo = async (input: z.TypeOf<typeof insertToDoInputSchema>) 
     logDev(`
         INSERT INTO todos (${keys})
         VALUES (${values.map((value) => absValue(value))});
-        
         SELECT MAX(todo_id) FROM todos
         WHERE user_id = ${absValue(input.user_id)};
       `);
