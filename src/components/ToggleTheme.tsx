@@ -21,7 +21,7 @@ export const ToggleTheme = ({
 } & Omit<React.ComponentPropsWithoutRef<'div'>, 'className'>,) => {
 
     return (
-        <div ref={ref} {...props} className={cn(classNameDiv, "flex items-center space-x-2")}>
+        <div ref={ref} {...props} className={cn(classNameDiv)}>
             <Switch id="theme" onCheckedChange={() => {
                 const htmlTag = document.querySelector<HTMLHtmlElement>('html');
                 if (!htmlTag) {
@@ -40,7 +40,7 @@ export const ToggleTheme = ({
             />
             {
                 withLabel &&
-                <Label className={cn(classNameLabel, "text-base font-semibold")} htmlFor="theme">{labelText || "Toggle Theme"}</Label>
+                <Label className={cn(classNameLabel)} htmlFor="theme">{labelText || "Toggle Theme"}</Label>
             }
         </div>
     )
