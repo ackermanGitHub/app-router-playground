@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import { ClerkProvider } from '@clerk/nextjs'
 import Navbar from '@/components/Navbar';
 import { dark } from '@clerk/themes';
+import { cookies } from 'next/headers';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,13 +17,15 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+
+  const cookieStore = cookies();
+  const theme = cookieStore.get('theme');
+
   return (
-    <ClerkProvider appearance={{
-      baseTheme: dark
-    }}>
+    <ClerkProvider appearance={{ baseTheme: dark }}>
       <html style={{
-        colorScheme: "dark",
-      }} className='dark' lang="en">
+        colorScheme: theme?.value === "dark" ? "dark" : "light",
+      }} className={theme?.value === "dark" ? "dark" : "light"} lang="en">
         <body className={`${inter.className} bg-gradient-to-r from-[#F6FFDE] to-[#E3F2C1] dark:from-[#293232] dark:to-[#232929]`}>
           <Navbar />
           <main className='max-[600px]:mb-20 min-[600px]:ml-20'>

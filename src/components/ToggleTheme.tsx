@@ -11,7 +11,14 @@ function ToggleTheme() {
                 if (!htmlTag) {
                     throw new Error('No html tag');
                 }
-                htmlTag.style.colorScheme = htmlTag.style.colorScheme === 'dark' ? 'light' : 'dark';
+                if (htmlTag.style.colorScheme === 'dark') {
+
+                    htmlTag.style.colorScheme = 'light';
+                    document.cookie = 'theme=light';
+                } else {
+                    document.cookie = 'theme=dark';
+                    htmlTag.style.colorScheme = 'dark';
+                }
                 htmlTag.classList.toggle('dark');
             }} />
             <Label htmlFor="theme">Toggle Theme</Label>
