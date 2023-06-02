@@ -4,6 +4,7 @@ import {
     UserButton
 } from "@clerk/nextjs";
 import Link from "next/link";
+import ToggleTheme from "./ToggleTheme";
 
 const Navbar = () => {
     return (
@@ -11,7 +12,7 @@ const Navbar = () => {
             <ul className="flex flex-row justify-center min-[600px]:flex-col items-center h-full">
                 <li className="hidden min-[600px]:block font-bold uppercase mb-4 text-center text-base">
                     <Link href="/" className=" w-full text-[#111111] hover:text-[#555555] dark:text-[#b6b6b6] dark:hover:text-[#ececec] hover:bg-[#FEDEFF] dark:hover:bg-[#0e151a] flex items-center h-20 grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-opacity duration-300">
-                        <span className="hidden ml-4 min-[600px]:group-hover:block logo-text">NoteTaker</span>
+                        <span className="hidden ml-4 max-[400px]:ml-2 min-[600px]:group-hover:block logo-text">NoteTaker</span>
                         <svg
                             aria-hidden="true"
                             focusable="false"
@@ -20,7 +21,7 @@ const Navbar = () => {
                             role="img"
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 448 512"
-                            className="min-w-[2rem] mx-[1.5rem] w-8 rotate-0 group-hover:rotate-180 transition-transform fa-angle-double-right fa-w-14 fa-5x"
+                            className="min-w-[2rem] mx-[1.5rem] max-[400px]:mx-[0.5rem] w-8 rotate-0 group-hover:rotate-180 transition-transform fa-angle-double-right fa-w-14 fa-5x"
                         >
                             <g className="fa-group">
                                 <path
@@ -41,17 +42,17 @@ const Navbar = () => {
                 <li className="flex justify-center w-full last:mt-auto">
                     <Link href="/" className=" w-full text-[#111111] font-semibold hover:text-[#555555] dark:text-[#b6b6b6] dark:hover:text-[#ececec] hover:bg-[#FEDEFF] dark:hover:bg-[#0e151a] flex items-center max-[600px]:justify-center h-20 grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-opacity duration-300 ">
 
-                        <svg aria-label="Home" className="min-w-[2rem] mx-[1.5rem] w-8" color="currentColor" fill="currentColor" height="24" role="img" viewBox="0 0 24 24" width="24">
+                        <svg aria-label="Home" className="min-w-[2rem] mx-[1.5rem] max-[400px]:mx-[0.5rem] w-8" color="currentColor" fill="currentColor" height="24" role="img" viewBox="0 0 24 24" width="24">
                             <path className="text-[#222222] dark:text-[#ff7eee]" d="M22 23h-6.001a1 1 0 0 1-1-1v-5.455a2.997 2.997 0 1 0-5.993 0V22a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V11.543a1.002 1.002 0 0 1 .31-.724l10-9.543a1.001 1.001 0 0 1 1.38 0l10 9.543a1.002 1.002 0 0 1 .31.724V22a1 1 0 0 1-1 1Z"></path>
                         </svg>
-                        <span className="hidden ml-4 min-[600px]:group-hover:block">Home</span>
+                        <span className="hidden ml-4 max-[400px]:ml-2 min-[600px]:group-hover:block">Home</span>
                     </Link>
                 </li>
 
                 <li className="flex justify-center w-full last:mt-auto">
                     <Link href="/todos" className=" w-full text-[#111111] font-semibold hover:text-[#555555] dark:text-[#b6b6b6] dark:hover:text-[#ececec] hover:bg-[#FEDEFF] dark:hover:bg-[#0e151a] flex items-center max-[600px]:justify-center h-20 grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-opacity duration-300">
 
-                        <svg width={30} height={30} className="min-w-[2rem] mx-[1.5rem] w-8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg width={30} height={30} className="min-w-[2rem] mx-[1.5rem] max-[400px]:mx-[0.5rem] w-8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path className="text-[#222222] dark:text-[#ff7eee]" opacity="0.4" d="M11 19.5H21" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                             <path className="text-[#222222] dark:text-[#ff7eee]" opacity="0.4" d="M11 12.5H21" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                             <path className="text-[#222222] dark:text-[#ff7eee]" opacity="0.4" d="M11 5.5H21" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -59,52 +60,60 @@ const Navbar = () => {
                             <path className="text-[#222222] dark:text-[#ff7eee]" d="M3 12.5L4 13.5L7 10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                             <path className="text-[#222222] dark:text-[#ff7eee]" d="M3 19.5L4 20.5L7 17.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
-                        <span className="hidden ml-4 min-[600px]:group-hover:block">ToDo&apos;s</span>
+                        <span className="hidden ml-4 max-[400px]:ml-2 min-[600px]:group-hover:block">ToDo&apos;s</span>
                     </Link>
                 </li>
 
                 <li className="flex justify-center w-full last:mt-auto">
                     <Link href="images" className=" w-full text-[#111111] font-semibold hover:text-[#555555] dark:text-[#b6b6b6] dark:hover:text-[#ececec] hover:bg-[#FEDEFF] dark:hover:bg-[#0e151a] flex items-center max-[600px]:justify-center h-20 grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-opacity duration-300">
 
-                        <svg width={24} height={24} className="min-w-[2rem] mx-[1.5rem] w-8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg width={24} height={24} className="min-w-[2rem] mx-[1.5rem] max-[400px]:mx-[0.5rem] w-8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path className="text-[#222222] dark:text-[#ff7eee]" d="M9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                             <path className="text-[#222222] dark:text-[#ff7eee]" d="M9 10C10.1046 10 11 9.10457 11 8C11 6.89543 10.1046 6 9 6C7.89543 6 7 6.89543 7 8C7 9.10457 7.89543 10 9 10Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                             <path className="text-[#222222] dark:text-[#ff7eee]" d="M2.67004 18.9501L7.60004 15.6401C8.39004 15.1101 9.53004 15.1701 10.24 15.7801L10.57 16.0701C11.35 16.7401 12.61 16.7401 13.39 16.0701L17.55 12.5001C18.33 11.8301 19.59 11.8301 20.37 12.5001L22 13.9001" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
-                        <span className="hidden ml-4 min-[600px]:group-hover:block">Images</span>
+                        <span className="hidden ml-4 max-[400px]:ml-2 min-[600px]:group-hover:block">Images</span>
                     </Link>
                 </li>
 
                 {/* <li className="justify-center w-full last:mt-auto">
                     <Link href="#" className=" w-full text-[#111111] font-semibold hover:text-[#555555] dark:text-[#b6b6b6] dark:hover:text-[#ececec] hover:bg-[#FEDEFF] dark:hover:bg-[#0e151a] flex items-center max-[600px]:justify-center h-20 grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-opacity duration-300">
 
-                        <svg aria-label="New post" className="min-w-[2rem] mx-[1.5rem] w-8" color="currentColor" fill="currentColor" height="24" role="img" viewBox="0 0 24 24" width="24">
+                        <svg aria-label="New post" className="min-w-[2rem] mx-[1.5rem] max-[400px]:mx-[0.5rem] w-8" color="currentColor" fill="currentColor" height="24" role="img" viewBox="0 0 24 24" width="24">
                             <path className="text-[#222222] dark:text-[#ff7eee]" d="M2 12v3.45c0 2.849.698 4.005 1.606 4.944.94.909 2.098 1.608 4.946 1.608h6.896c2.848 0 4.006-.7 4.946-1.608C21.302 19.455 22 18.3 22 15.45V8.552c0-2.849-.698-4.006-1.606-4.945C19.454 2.7 18.296 2 15.448 2H8.552c-2.848 0-4.006.699-4.946 1.607C2.698 4.547 2 5.703 2 8.552Z" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
                             <line className="text-[#222222] dark:text-[#ff7eee]" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" x1="6.545" x2="17.455" y1="12.001" y2="12.001"></line>
                             <line className="text-[#222222] dark:text-[#ff7eee]" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" x1="12.003" x2="12.003" y1="6.545" y2="17.455"></line>
                         </svg>
-                        <span className="hidden ml-4 min-[600px]:group-hover:block">Add</span>
+                        <span className="hidden ml-4 max-[400px]:ml-2 min-[600px]:group-hover:block">Add</span>
                     </Link>
                 </li> */}
+                <li className="flex max-[400px]:hidden justify-center w-full last:mt-auto">
+                    <ToggleTheme
+                        classNameLabel="hidden ml-4 max-[400px]:ml-2 min-[600px]:group-hover:block"
+                        classNameSwitch="min-w-[2rem] mx-[1.5rem] max-[400px]:mx-[0.5rem]"
+                        classNameDiv="w-full text-[#111111] font-semibold hover:text-[#555555] dark:text-[#b6b6b6] dark:hover:text-[#ececec] hover:bg-[#FEDEFF] dark:hover:bg-[#0e151a] flex items-center max-[600px]:justify-center h-20 grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-opacity duration-300"
+                        labelText="Theme"
+                    />
+                </li>
 
                 <li className="flex justify-center w-full last:mt-auto">
                     <div className="w-full text-[#111111] font-semibold hover:text-[#555555] dark:text-[#b6b6b6] dark:hover:text-[#ececec] hover:bg-[#FEDEFF] dark:hover:bg-[#0e151a] flex items-center max-[600px]:justify-center h-20 grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-opacity duration-300 cursor-pointer">
                         <SignedIn>
                             <div className="flex items-center max-[600px]:justify-center h-20">
-                                <div className="min-w-[2rem] mx-[1.5rem] w-8">
+                                <div className="min-w-[2rem] mx-[1.5rem] max-[400px]:mx-[0.5rem] w-8">
                                     <UserButton afterSignOutUrl="/" />
                                 </div>
-                                <span className="hidden ml-4 min-[600px]:group-hover:block">Profile</span>
+                                <span className="hidden ml-4 max-[400px]:ml-2 min-[600px]:group-hover:block">Profile</span>
                             </div>
                         </SignedIn>
                         <SignedOut>
                             <Link className="flex items-center max-[600px]:justify-center h-20" href="/sign-in">
-                                <svg className="min-w-[2rem] mx-[1.5rem] w-8" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <svg className="min-w-[2rem] mx-[1.5rem] max-[400px]:mx-[0.5rem] w-8" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                     <path className="text-[#222222] dark:text-[#ff7eee]" d="M18 20a6 6 0 0 0-12 0"></path>
                                     <circle className="text-[#222222] dark:text-[#ff7eee]" cx="12" cy="10" r="4"></circle>
                                     <circle className="text-[#222222] dark:text-[#ff7eee]" cx="12" cy="12" r="10"></circle>
                                 </svg>
-                                <span className="hidden ml-4 min-[600px]:group-hover:block">Profile</span>
+                                <span className="hidden ml-4 max-[400px]:ml-2 min-[600px]:group-hover:block">Profile</span>
                             </Link>
                         </SignedOut>
                     </div>
@@ -126,7 +135,7 @@ export default Navbar;
                             role="img"
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 512 512"
-                            className="min-w-[2rem] mx-[1.5rem] w-8"
+                            className="min-w-[2rem] mx-[1.5rem] max-[400px]:mx-[0.5rem] w-8"
                         >
                             <g className="fa-group">
                                 <path
@@ -151,7 +160,7 @@ export default Navbar;
                             role="img"
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 576 512"
-                            className="min-w-[2rem] mx-[1.5rem] w-8 fa-alien-monster fa-w-18 fa-9x"
+                            className="min-w-[2rem] mx-[1.5rem] max-[400px]:mx-[0.5rem] w-8 fa-alien-monster fa-w-18 fa-9x"
                         >
                             <g className="fa-group">
                                 <path
@@ -178,7 +187,7 @@ export default Navbar;
                             role="img"
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 512 512"
-                            className="min-w-[2rem] mx-[1.5rem] w-8 fa-space-station-moon-alt fa-w-16 fa-5x"
+                            className="min-w-[2rem] mx-[1.5rem] max-[400px]:mx-[0.5rem] w-8 fa-space-station-moon-alt fa-w-16 fa-5x"
                         >
                             <g className="fa-group">
                                 <path
@@ -203,7 +212,7 @@ export default Navbar;
                             role="img"
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 640 512"
-                            className="min-w-[2rem] mx-[1.5rem] w-8 fa-space-shuttle fa-w-20 fa-5x"
+                            className="min-w-[2rem] mx-[1.5rem] max-[400px]:mx-[0.5rem] w-8 fa-space-shuttle fa-w-20 fa-5x"
                         >
                             <g className="fa-group">
                                 <path
@@ -231,7 +240,7 @@ export default Navbar;
                             role="img"
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 512 512"
-                            className="min-w-[2rem] mx-[1.5rem] w-8 fa-moon-stars fa-w-16 fa-7x"
+                            className="min-w-[2rem] mx-[1.5rem] max-[400px]:mx-[0.5rem] w-8 fa-moon-stars fa-w-16 fa-7x"
                         >
                             <g className="fa-group">
                                 <path
@@ -255,7 +264,7 @@ export default Navbar;
                             role="img"
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 512 512"
-                            className="min-w-[2rem] mx-[1.5rem] w-8 fa-sun fa-w-16 fa-7x"
+                            className="min-w-[2rem] mx-[1.5rem] max-[400px]:mx-[0.5rem] w-8 fa-sun fa-w-16 fa-7x"
                         >
                             <g className="fa-group">
                                 <path
@@ -279,7 +288,7 @@ export default Navbar;
                             role="img"
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 576 512"
-                            className="min-w-[2rem] mx-[1.5rem] w-8 fa-sunglasses fa-w-18 fa-7x"
+                            className="min-w-[2rem] mx-[1.5rem] max-[400px]:mx-[0.5rem] w-8 fa-sunglasses fa-w-18 fa-7x"
                         >
                             <g className="fa-group">
                                 <path
@@ -294,7 +303,7 @@ export default Navbar;
                                 ></path>
                             </g>
                         </svg>
-                        <span className="hidden ml-4 min-[600px]:group-hover:block">Themify</span>
+                        <span className="hidden ml-4 max-[400px]:ml-2 min-[600px]:group-hover:block">Themify</span>
                     </a>
                 </li>
 */
