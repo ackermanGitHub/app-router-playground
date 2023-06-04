@@ -90,8 +90,8 @@ const Navbar = () => {
                 <li className="flex ¡max-[320px]:hidden justify-center w-full last:mt-auto">
                     <ToggleTheme
                         classNameDiv="w-full text-[#111111] font-semibold hover:text-[#555555] dark:text-[#b6b6b6] dark:hover:text-[#ececec] hover:bg-[#FEDEFF] dark:hover:bg-[#0e151a] flex items-center max-[600px]:justify-center h-20 grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-opacity duration-300"
-                        classNameSwitch="min-w-[2rem] mx-[1.5rem] max-[400px]:mx-[0.5rem]"
-                        classNameLabel="text-base font-semibold hidden ml-[0.2rem] max-[400px]:ml-2 min-[600px]:group-hover:block"
+                        classNameSwitch="min-w-[2rem] mr-[1.5rem] ml-[1rem] max-[400px]:mx-[0.5rem]"
+                        classNameLabel="text-base font-semibold hidden ml-[0.7rem] max-[400px]:ml-2 min-[600px]:group-hover:block"
                         labelText="Theme"
                     />
                 </li>
