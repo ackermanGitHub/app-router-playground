@@ -9,9 +9,10 @@ import { z } from "zod"
 import { useUser } from "@clerk/nextjs";
 import { TableView } from "@/components/TableView"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { useRef, useState, useTransition } from "react";
+import { useState, useTransition } from "react";
 import { deleteTodos, insertToDo } from "@/server/actions";
 import { Button } from "@/components/ui/button";
+import NotDoneYet from "@/components/NotDoneYet";
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
@@ -193,7 +194,7 @@ export function DataTable<TData, TValue>({
             <TabsContent value="board">
                 {
                     data.length
-                        ? <>Put your board here.</>
+                        ? <NotDoneYet />
                         : <>You don&apos;t have any todos yet. Add one below</>
                 }
             </TabsContent>
