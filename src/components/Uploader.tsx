@@ -50,7 +50,6 @@ export function MultiUploader() {
                     <Input className="hidden" id="file-upload" ref={inputRef} type="file" accept="image/*" onChange={handleFileSelect} multiple />
                 </div>
                 <Button
-                    className="🅱️"
                     onClick={() => {
                         startTransition(async () => {
                             const promises = imagesToUpload.map(async (image) => {

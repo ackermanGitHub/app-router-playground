@@ -14,7 +14,7 @@ const error: React.FC<errorProps> = ({ error, reset }) => {
             <h1 className="text-2xl font-bold">Something went wrong</h1>
             <p className="text-lg">{error.message}</p>
             <Divider />
-            <Button className="🅱️" onClick={reset}>Try Again</Button>
+            <Button onClick={reset}>Try Again</Button>
         </div>
     )
 }
