@@ -52,7 +52,7 @@ export function TableView<TData, TValue>({
                     table.getRowModel().rows.map((row, index) => (
                         <TableRow
                             /* This comment is in the memory of the many, and i mean, maaany hours wasted triying to fing a bug related to the id setted here */
-                            key={row.original.todo_id}
+                            key={row.original.date_created.getMilliseconds()}
                             data-state={row.getIsSelected() && "selected"}
                         >
                             {row.getVisibleCells().map((cell) => (
