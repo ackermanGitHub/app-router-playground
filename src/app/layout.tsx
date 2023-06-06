@@ -25,8 +25,9 @@ export default function RootLayout({
     <ClerkProvider appearance={{ baseTheme: dark }}>
       <html style={{
         colorScheme: theme?.value === "dark" ? "dark" : "light",
+        height: "100%"
       }} className={theme?.value === "dark" ? "dark" : "light"} lang="en">
-        <body className={`${inter.className} bg-gradient-to-r from-[#F6FFDE] to-[#E3F2C1] dark:from-[#293232] dark:to-[#232929]`}>
+        <body className={`${inter.className} h-full bg-gradient-to-r from-[#F6FFDE] to-[#E3F2C1] dark:from-[#293232] dark:to-[#232929]`}>
           <Navbar />
           <main className='max-[600px]:mb-20 min-[600px]:ml-20'>
             {children}
