@@ -4,6 +4,7 @@ import { ClerkProvider } from '@clerk/nextjs'
 import Navbar from '@/components/Navbar';
 import { dark } from '@clerk/themes';
 import { cookies } from 'next/headers';
+import Footer from '@/components/Footer';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -32,6 +33,7 @@ export default function RootLayout({
           <main className='max-[600px]:mb-20 min-[600px]:ml-20'>
             {children}
           </main>
+          <Footer />
         </body>
       </html>
     </ClerkProvider>
