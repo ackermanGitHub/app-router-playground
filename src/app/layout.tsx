@@ -29,7 +29,7 @@ export default function RootLayout({
       }} className={theme?.value === "dark" ? "dark" : "light"} lang="en">
         <body className={`${inter.className} h-full bg-gradient-to-r from-[#F6FFDE] to-[#E3F2C1] dark:from-[#293232] dark:to-[#232929]`}>
           <Navbar />
-          <main className='max-[600px]:pb-20 min-[600px]:ml-20 overflow-y-auto'>
+          <main className='max-[600px]:pb-20 min-[600px]:ml-20 h-full overflow-y-auto'>
             {children}
           </main>
         </body>
