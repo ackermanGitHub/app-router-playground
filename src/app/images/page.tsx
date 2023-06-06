@@ -25,7 +25,7 @@ export default async function ProfilePage() {
     const { userId } = auth();
 
     if (!userId) return (
-        <div className="container text-center mx-auto p-4 h-[80vh] w-full flex flex-col justify-center items-center">
+        <div className="container text-center mx-auto p-4 max-[600px]:h-[calc(100vh-80px)] min-[600px]:h-screen w-full flex flex-col justify-center items-center">
             <h2 className="text-2xl text-gray-700 dark:text-slate-400">
                 <span className="font-bold">You are not logged in.</span>
                 <br />
