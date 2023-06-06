@@ -139,8 +139,8 @@ export function DataTable<TData, TValue>({
 
 
     return (
-        <Tabs defaultValue="table" className="container mx-auto p-4">
-            <div className="flex justify-between items-center mb-4">
+        <Tabs defaultValue="table" className="max-w-3xl mx-auto">
+            <div className="flex justify-between items-center mb-4 p-4">
                 <TabsList>
                     <TabsTrigger value="table">Table</TabsTrigger>
                     <TabsTrigger value="board">Board</TabsTrigger>
