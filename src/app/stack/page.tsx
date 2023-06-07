@@ -16,11 +16,6 @@ export default function StackPage() {
   return (
     <div className="flex h-auto flex-col items-center justify-center">
       <Divider />
-      <ToggleTheme
-        classNameDiv="space-x-4 flex items-center justify-center"
-        classNameLabel="font-semibold"
-      />
-      <Divider />
       <div className="flex items-center gap-2 flex-wrap justify-center">
 
         <PostgresIcoSVG />
