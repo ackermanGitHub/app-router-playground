@@ -9,17 +9,17 @@ export default function HomePage() {
         <FeatureCard title='Secure' subtitle='Almost' text='Your notes will be safe in a secure database with the following password: "Mc7TXZHw9jVo"'>
           <svg fill="currentColor" width="52px" height="52px" viewBox="0 0 24 24" id="secure" data-name="Flat Line" xmlns="http://www.w3.org/2000/svg">
             <path id="secondary" d="M12,21l.88-.38a11,11,0,0,0,6.63-9.26l.43-5.52a1,1,0,0,0-.76-1L12,3,4.82,4.8a1,1,0,0,0-.76,1l.43,5.52a11,11,0,0,0,6.63,9.26Z" style={{ fill: "rgb(44, 169, 188)", strokeWidth: "2" }}></path>
-            <polyline id="primary" points="9 11 11 13 15 9" style={{ fill: "none", stroke: "rgb(0, 0, 0)", strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: "2" }} ></polyline>
-            <path id="primary-2" data-name="primary" d="M12,21l.88-.38a11,11,0,0,0,6.63-9.26l.43-5.52a1,1,0,0,0-.76-1L12,3,4.82,4.8a1,1,0,0,0-.76,1l.43,5.52a11,11,0,0,0,6.63,9.26Z" style={{ fill: "none", stroke: "rgb(0, 0, 0)", strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: "2" }}></path>
+            <polyline id="primary" points="9 11 11 13 15 9" style={{ fill: "none", stroke: "#464455", strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: "2" }} ></polyline>
+            <path id="primary-2" data-name="primary" d="M12,21l.88-.38a11,11,0,0,0,6.63-9.26l.43-5.52a1,1,0,0,0-.76-1L12,3,4.82,4.8a1,1,0,0,0-.76,1l.43,5.52a11,11,0,0,0,6.63,9.26Z" style={{ fill: "none", stroke: "#464455", strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: "2" }}></path>
           </svg>
         </FeatureCard>
         <FeatureCard title='Always Free' subtitle='No Adds' text='We dont show adds content while you browse your diary todos'>
           <svg width="52px" height="52px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M14.65 8.93274L12.4852 4.30901C12.2923 3.89699 11.7077 3.897 11.5148 4.30902L9.35002 8.93274L4.45559 9.68243C4.02435 9.74848 3.84827 10.2758 4.15292 10.5888L7.71225 14.2461L6.87774 19.3749C6.80571 19.8176 7.27445 20.1487 7.66601 19.9317L12 17.5299L16.334 19.9317C16.7256 20.1487 17.1943 19.8176 17.1223 19.3749L16.2878 14.2461L19.8471 10.5888C20.1517 10.2758 19.9756 9.74848 19.5444 9.68243L14.65 8.93274Z" stroke="#464455" strokeLinecap="round" stroke-linejoin="round" />
+            <path d="M14.65 8.93274L12.4852 4.30901C12.2923 3.89699 11.7077 3.897 11.5148 4.30902L9.35002 8.93274L4.45559 9.68243C4.02435 9.74848 3.84827 10.2758 4.15292 10.5888L7.71225 14.2461L6.87774 19.3749C6.80571 19.8176 7.27445 20.1487 7.66601 19.9317L12 17.5299L16.334 19.9317C16.7256 20.1487 17.1943 19.8176 17.1223 19.3749L16.2878 14.2461L19.8471 10.5888C20.1517 10.2758 19.9756 9.74848 19.5444 9.68243L14.65 8.93274Z" stroke="#464455" strokeLinecap="round" strokeWidth="2" stroke-linejoin="round" />
           </svg>
         </FeatureCard>
         <FeatureCard title='Lightweight' subtitle='without Mb spending' text='You do not have to worry about your data plan since the page consumes almost nothing'>
-          <svg fill="currentColor" height="52px" width="52px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+          <svg fill="#464455" height="52px" width="52px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 295.844 295.844" xmlSpace="preserve">
             <g>
               <path d="M164.385,253.939h-6.342v-24.093c0-3.529-2.861-6.39-6.39-6.39h-19.698c-3.529,0-6.39,2.861-6.39,6.39l0,24.093h-6.342

@@ -3,15 +3,13 @@ import Link from 'next/link'
 
 const Footer = () => {
     return (
-        <footer className='w-full bg-gray-300 dark:bg-gray-800 text-center py-8'>
+        <footer className='w-full max-[600px]:pb-24 bg-gray-300 dark:bg-gray-800 text-center py-8'>
             <div className='flex w-full gap-10 items-center justify-center'>
                 <Link href='https://github.com/ackermanGitHub'>
                     <svg width="32px" height="32px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" >
-
                         <title>github [#142]</title>
                         <desc>Created with Sketch.</desc>
                         <defs>
-
                         </defs>
                         <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
                             <g id="Dribbble-Light-Preview" transform="translate(-140.000000, -7559.000000)" fill="#000000">
@@ -26,11 +24,9 @@ const Footer = () => {
                 </Link>
                 <Link href="https://twitter.com/july_dev">
                     <svg width="32px" height="32px" viewBox="0 -4 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
-
                         <title>Twitter-color</title>
                         <desc>Created with Sketch.</desc>
                         <defs>
-
                         </defs>
                         <g id="Icons" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
                             <g id="Color-" transform="translate(-300.000000, -164.000000)" fill="#00AAEC">
