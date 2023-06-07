@@ -12,7 +12,7 @@ const error: React.FC<errorProps> = ({ error, reset }) => {
         <div className="flex flex-col items-center justify-center max-[600px]:h-[calc(100vh-80px)] min-[600px]:h-screen text-gray-700 dark:text-slate-400">
             <h1 className="text-xl font-bold">{error.name}</h1>
             <h1 className="text-2xl font-bold">Something went wrong</h1>
-            <p className="text-lg">{error.message}</p>
+            <p className="text-lg mx-12 min-[768px]:w-[60%]">{error.message}</p>
             <Divider />
             <Button onClick={reset}>Try Again</Button>
         </div>
